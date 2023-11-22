@@ -1,0 +1,7 @@
+.profileIcon{
+    cursor: pointer;
+}
+.profileIcon:hover{
+    /* box-shadow: 2px solid blue; */
+    color: #102c4f;
+}

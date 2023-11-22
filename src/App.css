@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: inherit;
+}
