@@ -64,7 +64,6 @@ const AdminUser = (props) => {
 
         //user list 
         userLists().then((response) => {
-            console.log("User data for listing : ", response.data.listOfData)
             setUsers(response.data.listOfData);
         }).catch(error => {
             console.log(error)

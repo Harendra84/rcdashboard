@@ -24,7 +24,6 @@ import UpdateViewCoordinatorPublications from "@/views/coordinator/Publications/
 const AuthRoutes = [
 
   // <Route key="Dashboard" path="/" element={<AuthGuard component={<AdminDashboard />} />} />,
-
   <Route key="Dashboard" path="/admin-dashboard/*" element={<AuthGuard component={
     <React.Fragment>
       <Layout accessRoutes={AdminAccess}>

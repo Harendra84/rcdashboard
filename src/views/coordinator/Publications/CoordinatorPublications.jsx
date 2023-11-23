@@ -45,7 +45,7 @@ const CoordinatorPublications = (props) => {
 
         if (response?.data) {
             setIsDialogOpen(false)
-            setPublications([ ...publications, response.data.data])
+            setPublications([...publications, response.data.data])
         }
     };
 
@@ -53,7 +53,6 @@ const CoordinatorPublications = (props) => {
 
         //publications type list 
         publicationsTypeLists().then((response) => {
-            console.log("Publications type data for listing : ", response.data.listOfData)
             setPublicationsTypes(response.data.listOfData);
         }).catch(error => {
             console.log(error)
@@ -61,7 +60,6 @@ const CoordinatorPublications = (props) => {
 
         // rc center list 
         rcCenterLists().then((response) => {
-            console.log("Rc cente data for listing : ", response.data.listOfData)
             setRcCenters(response.data.listOfData);
         }).catch(error => {
             console.log(error)
@@ -69,8 +67,6 @@ const CoordinatorPublications = (props) => {
 
         // publications list 
         publicationsLists().then((response) => {
-            console.log(response)
-            console.log(response.data.listOfData)
             setPublications(response.data.listOfData);
         }).catch(error => {
             console.log(error)

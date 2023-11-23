@@ -1,39 +1,44 @@
 import { useState } from "react";
 import "./login.css";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/LoginService";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Login = () => {
+
   const [inputs, setInputes] = useState({
     username: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
+  
   const handleChange = (e) => {
     setInputes((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       const res = await login(inputs.username, inputs.password);
-      console.log(res);
       if (!res.data.status) {
-        // alert('Wrong Credentials!')
         toast.error("Wrong Credentials 😢");
-        // return navigate(0)
       }
       if (res.data.status) {
         localStorage.setItem("loginStatus", JSON.stringify(res.data.status));
         localStorage.setItem("userInfo", JSON.stringify(res.data.data));
         if (res.data.data.roleType === "ADMIN") {
+          toast.success("Admin login successfully!!");
           return navigate("/admin-dashboard");
         } else if (res.data.data.roleType === "CEO") {
+          toast.success("Ceo login successfully!!");
           return navigate("/ceo-dashboard");
         } else if (res.data.data.roleType === "COORDINATOR") {
+          toast.success("Coordinator login successfully!!");
           return navigate("/coordinator-dashboard");
         } else {
           toast.error("Something went wrong!");
@@ -56,16 +61,18 @@ const Login = () => {
         <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
           <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
             <div className="mt-12 flex flex-col items-center">
-              <h1 className="text-2xl xl:text-3xl font-extrabold">Sign in</h1>
+              <h1 className="text-2xl font-extrabold mb-5">Welcome, to Rc Dashboard</h1>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
+                <label htmlFor="username" className="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                   <input
                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="text"
                     name="username"
-                    placeholder="username"
+                    placeholder="Username"
                     onChange={handleChange}
                   />
+                  <label htmlFor="Password" className="block mt-4 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                   <input
                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     type="password"
@@ -73,8 +80,7 @@ const Login = () => {
                     placeholder="Password"
                     onChange={handleChange}
                   />
-                  <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" onClick={handleSubmit}
-                      type="submit">
+                  <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" onClick={handleSubmit} type="submit">
                     <svg
                       className="w-6 h-6 -ml-2"
                       fill="none"
@@ -87,8 +93,16 @@ const Login = () => {
                       <circle cx="8.5" cy={7} r={4} />
                       <path d="M20 8v6M23 11h-6" />
                     </svg>
-                    <span className="ml-3">Sign In</span>
+                    <span className="ml-3">{loading ? (
+                      <AiOutlineLoading3Quarters className="flex items-center justify-center w-full animate-spin" />
+                    ) : (
+                      "Login In"
+                    )}</span>
+
                   </button>
+                  <div className="mt-5 text-gray-800 font-bold flex justify-center">
+                    <Link to={`/forget`}>Forget Password?</Link>
+                  </div>
                 </div>
               </div>
             </div>

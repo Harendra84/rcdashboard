@@ -1,5 +1,5 @@
 import axiosInstance from "../utils/axiosInstance";
-import { HOST_API_KEY, USER_URL } from '../utils/globalConfig'
+import {HOST_API_KEY, USER_URL } from '../utils/globalConfig'
 
 export const userLists = async () => {
     return axiosInstance.post(`${HOST_API_KEY}${USER_URL}/lists`);

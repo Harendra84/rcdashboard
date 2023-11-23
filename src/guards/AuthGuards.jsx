@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import {userType} from '../utils/globalConfig'
+import { userType } from '../utils/globalConfig'
 
 const AuthGuard = ({ component }) => {
   const [status, setStatus] = useState(false);
@@ -13,23 +13,19 @@ const AuthGuard = ({ component }) => {
 
   const checkUser = async () => {
     try {
-      // let user = await AuthService.getProfile(true);
-      // let user = await AuthService.getProfile(true);
       JSON.parse(localStorage.getItem("loginStatus"));
       let user = JSON.parse(localStorage.getItem("userInfo"));
       if (!user) {
         navigate(`/login`);
         return;
       }
-
-      // Check the user's role
       if (user.roleType === userType.ADMIN) {
         navigate(`/admin-dashboard`);
-      }  else if(user.roleType === userType.CEO){
+      } else if (user.roleType === userType.CEO) {
         navigate(`/ceo-dashboard`);
-      } else if(user.roleType === userType.COORDINATOR){
+      } else if (user.roleType === userType.COORDINATOR) {
         navigate(`/coordinator-dashboard`);
-      }else{
+      } else {
         navigate(`/login`);
       }
       setStatus(true);
