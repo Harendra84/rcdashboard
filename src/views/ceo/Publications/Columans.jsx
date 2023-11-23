@@ -10,6 +10,19 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
 
+const showPublicationColor = ({ row }) => {
+    const totalMember = row.original.rcCenter.totalMembers;
+    const benchMarks = row.original.publicationsType.benchmarksNo;
+    const avg = Math.ceil(totalMember * benchMarks);
+    let colorClass = "text-red-600 font-semibold bg-[#ffcdd2] px-8 py-2 rounded-xl";
+    if (avg === row.original.publicationsNo) {
+        colorClass = "text-yellow-600 font-semibold bg-[#fff9c4] px-8 py-2 rounded-xl";
+    } else if (row.original.publicationsNo > avg) {
+        colorClass = "text-green-600 font-semibold bg-[#c8e6c9] px-8 py-2 rounded-xl";
+    }
+    return <span className={colorClass}>{row.original.publicationsNo}</span>;
+}
+
 export const CellComponent = ({ row }) => {
     let navigate = useNavigate();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -93,8 +106,45 @@ export const columns = [
         cell: (info) => <span>{info.row.index + 1}</span>,
         header: "S.No",
     }),
+    // {
+    //     accessorFn: row => {
+    //         console.log(row);
+    //         let totalMember = row.rcCenter.totalMembers;
+    //         let benchMarks = row.publicationsType.benchmarksNo;
+    //         let avg = Math.ceil(totalMember * benchMarks);
+    //         if (avg === row.publicationsNo) {
+    //             return <span className="text-yellow-600">{row.publicationsNo}</span>;
+    //         } else if (row.publicationsNo > avg) {
+    //             return <span className="text-green-600">{row.publicationsNo}</span>;
+    //         } else {
+    //             return <span className="text-red-600">{row.publicationsNo}</span>;
+    //         }
+    //     },
+    //     header: "Publications No",
+    // },
     {
-        accessorKey: "publicationsNo",
+        id: "Publications No",
+        enableHiding: false,
+        cell: showPublicationColor,
+        // cell: ({ row }) => {
+
+        //     return (
+        //         <>
+        //             {row.publicationsNo}
+        //         </>
+        //     )
+        //             // console.log(row);
+        // let totalMember = row.rcCenter.totalMembers;
+        // let benchMarks = row.publicationsType.benchmarksNo;
+        // let avg = Math.ceil(totalMember * benchMarks);
+        // if (avg === row.publicationsNo) {
+        //     return <span className="text-yellow-600">{row.publicationsNo}</span>;
+        // } else if (row.publicationsNo > avg) {
+        //     return <span className="text-green-600">{row.publicationsNo}</span>;
+        // } else {
+        //     return <span className="text-red-600">{row.publicationsNo}</span>;
+        // }
+        //         },
         header: "Publications No",
     },
     {
