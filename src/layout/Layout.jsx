@@ -13,12 +13,13 @@ const Layout = ({ accessRoutes, children }) => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50/50">
+      <div className="min-h-screen bg-gray-50/50 relative">
         <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} accessRoutes={accessRoutes} />
         <div className="p-4 xl:ml-80">
           <Header OpenSidebar={OpenSidebar} openSidebarToggle={openSidebarToggle} />
           {children}
-          <div className="text-blue-gray-600">
+          <div className="h-16"></div>
+          <div className="text-blue-gray-600 absolute bottom-0 right-0 left-80">
             <Footer />
           </div>
         </div>
@@ -33,3 +34,18 @@ Layout.propTypes = {
 }
 
 export default Layout;
+
+
+/* 
+<div className="min-h-screen bg-gray-50/50 flex flex-col">
+        <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} accessRoutes={accessRoutes} />
+        <div className="p-4 xl:ml-80 flex-1">
+          <Header OpenSidebar={OpenSidebar} openSidebarToggle={openSidebarToggle} />
+          {children}
+        </div>
+        <div className="text-blue-gray-600">
+          <Footer />
+        </div>
+      </div>
+
+*/
