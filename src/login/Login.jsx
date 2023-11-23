@@ -11,7 +11,7 @@ const Login = () => {
     username: "",
     password: "",
   });
-  
+
   const handleChange = (e) => {
     setInputes((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -64,9 +64,9 @@ const Login = () => {
               <h1 className="text-2xl font-extrabold mb-5">Welcome, to Rc Dashboard</h1>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
-                <label htmlFor="username" className="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                  <label htmlFor="username" className="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                   <input
-                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                    className="w-full px-8 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="text"
                     name="username"
                     placeholder="Username"
@@ -74,13 +74,13 @@ const Login = () => {
                   />
                   <label htmlFor="Password" className="block mt-4 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                   <input
-                    className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                    className="w-full px-8 py-2 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     type="password"
                     name="password"
                     placeholder="Password"
                     onChange={handleChange}
                   />
-                  <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" onClick={handleSubmit} type="submit">
+                  <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-2 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" onClick={handleSubmit} type="submit">
                     <svg
                       className="w-6 h-6 -ml-2"
                       fill="none"

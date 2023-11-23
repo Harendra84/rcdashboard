@@ -18,7 +18,7 @@ const Layout = ({ accessRoutes, children }) => {
         <div className="p-4 xl:ml-80">
           <Header OpenSidebar={OpenSidebar} openSidebarToggle={openSidebarToggle} />
           {children}
-          <div className="text-blue-gray-600">
+          <div className="fixed bottom-0 text-blue-gray-600">
             <Footer />
           </div>
         </div>
