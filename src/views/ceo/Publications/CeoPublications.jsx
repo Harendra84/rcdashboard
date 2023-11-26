@@ -33,19 +33,6 @@ const CeoPublications = (props) => {
         setPublication({ ...publication, [e.target.name]: e.target.value });
     };
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        publication.publicationsType.publicationsTypeId = publicationsTypeId;
-        publication.rcCenter.rcCenterId = rcCenterId;
-
-        const response = await addPublications(publication).catch(console.log);
-
-        if (response?.data) {
-            setIsDialogOpen(false)
-            setPublications([ ...publications, response.data.data])
-        }
-    };
-
     useEffect(() => {
 
         //publications type list 
@@ -62,13 +49,27 @@ const CeoPublications = (props) => {
             console.log(error)
         })
 
-        // publications list 
+        // publications list
         publicationsLists().then((response) => {
             setPublications(response.data.listOfData);
         }).catch(error => {
             console.log(error)
         })
     }, [])
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        
+        publication.publicationsType.publicationsTypeId = parseInt(publicationsTypeId);
+        publication.rcCenter.rcCenterId = parseInt(rcCenterId);
+
+        const response = await addPublications(publication).catch(console.log);
+
+        if (response?.data.status) {
+            setIsDialogOpen(false)
+            setPublications([ ...publications, response.data.data])
+        }
+    };
 
     return (
         <>

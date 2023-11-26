@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 
 const showPublicationColor = ({ row }) => {
+
     const totalMember = row.original.rcCenter.totalMembers;
     const benchMarks = row.original.publicationsType.benchmarksNo;
     const avg = Math.ceil(totalMember * benchMarks);
@@ -29,21 +30,22 @@ export const CellComponent = ({ row }) => {
 
     const handleDelete = () => {
         deletePublications(row.original.publicationsId).then((response) => {
-            console.log(response.data)
             if (response.data.status) {
                 navigate('/ceo-dashboard/publications');
+                setIsDialogOpen(false);
             }
         }).catch(error => {
             console.log(error)
         })
     };
+
     return (
         <>
             <Dialog>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-10 bg-gray-800 text-white border border-gray-500">
-                            <span className="sr-only">Open menu</span>
+                            <span className="sr-only">Open Menu</span>
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
@@ -74,23 +76,21 @@ export const CellComponent = ({ row }) => {
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                     {isDialogOpen && (
-                        //<Dialog>
-                        <DialogContent className="sm:max-w-[425px] bg-slate-600">
+                        <DialogContent className="sm:max-w-[425px] bg-white">
                             <DialogHeader>
-                                <DialogTitle className="text-red-800 text-2xl font-bold">Confirm!</DialogTitle>
+                                <DialogTitle className="text-red-600 text-xl font-bold">Confirm!</DialogTitle>
                                 <DropdownMenuSeparator />
-                                <DialogTitle className="text-white text-2xl">Are you sure?</DialogTitle>
-                                <DialogDescription className="text-white">
+                                <DialogTitle className="text-gray-800 text-xl font-bold">Are you sure?</DialogTitle>
+                                <DialogDescription className="text-gray-800">
                                     This action will delete this rc center permanentely.
                                 </DialogDescription>
                             </DialogHeader>
                             <DropdownMenuSeparator className="text-gray-800" />
                             <DialogFooter>
-                                <Button type="button" className="text-white bg-red-500 hover:bg-red-600" onClick={handleDelete}>Yes</Button>
-                                <Button type="button" onClick={() => setIsDialogOpen(false)}>No</Button>
+                                <Button type="button" className="text-gray-800 hover:bg-red-600" onClick={handleDelete}>Yes</Button>
+                                <Button type="button" className="text-gray-800 hover:bg-green-600" onClick={() => setIsDialogOpen(false)}>No</Button>
                             </DialogFooter>
                         </DialogContent>
-                        //</Dialog>
                     )}
                 </DropdownMenu>
             </Dialog>
@@ -106,45 +106,10 @@ export const columns = [
         cell: (info) => <span>{info.row.index + 1}</span>,
         header: "S.No",
     }),
-    // {
-    //     accessorFn: row => {
-    //         console.log(row);
-    //         let totalMember = row.rcCenter.totalMembers;
-    //         let benchMarks = row.publicationsType.benchmarksNo;
-    //         let avg = Math.ceil(totalMember * benchMarks);
-    //         if (avg === row.publicationsNo) {
-    //             return <span className="text-yellow-600">{row.publicationsNo}</span>;
-    //         } else if (row.publicationsNo > avg) {
-    //             return <span className="text-green-600">{row.publicationsNo}</span>;
-    //         } else {
-    //             return <span className="text-red-600">{row.publicationsNo}</span>;
-    //         }
-    //     },
-    //     header: "Publications No",
-    // },
     {
         id: "Publications No",
         enableHiding: false,
         cell: showPublicationColor,
-        // cell: ({ row }) => {
-
-        //     return (
-        //         <>
-        //             {row.publicationsNo}
-        //         </>
-        //     )
-        //             // console.log(row);
-        // let totalMember = row.rcCenter.totalMembers;
-        // let benchMarks = row.publicationsType.benchmarksNo;
-        // let avg = Math.ceil(totalMember * benchMarks);
-        // if (avg === row.publicationsNo) {
-        //     return <span className="text-yellow-600">{row.publicationsNo}</span>;
-        // } else if (row.publicationsNo > avg) {
-        //     return <span className="text-green-600">{row.publicationsNo}</span>;
-        // } else {
-        //     return <span className="text-red-600">{row.publicationsNo}</span>;
-        // }
-        //         },
         header: "Publications No",
     },
     {
@@ -156,6 +121,7 @@ export const columns = [
         header: "Rc Center"
     },
     {
+        header: "Actions",
         id: "actions",
         enableHiding: false,
         cell: CellComponent

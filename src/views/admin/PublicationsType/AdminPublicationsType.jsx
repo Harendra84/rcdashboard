@@ -69,7 +69,7 @@ const AdminPublicationsType = (props) => {
                                                 </div>
                                                 <div className="grid grid-cols-2 items-center gap-4">
                                                     <Label htmlFor="benchmarksNo" className="text-right text-slate-300 font-bold">Benchmarks No</Label>
-                                                    <Input onChange={(e) => handleChange(e)} type="number" id="benchmarksNo" name="benchmarksNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                    <Input onChange={(e) => handleChange(e)} type="any" id="benchmarksNo" name="benchmarksNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                 </div>
                                             </div>
                                             <DialogFooter>

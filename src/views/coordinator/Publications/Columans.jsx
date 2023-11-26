@@ -9,6 +9,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
+const showPublicationColor = ({ row }) => {
+    
+    const totalMember = row.original.rcCenter.totalMembers;
+    const benchMarks = row.original.publicationsType.benchmarksNo;
+    const avg = Math.ceil(totalMember * benchMarks);
+    let colorClass = "text-red-600 font-semibold bg-[#ffcdd2] px-8 py-2 rounded-xl";
+    if (avg === row.original.publicationsNo) {
+        colorClass = "text-yellow-600 font-semibold bg-[#fff9c4] px-8 py-2 rounded-xl";
+    } else if (row.original.publicationsNo > avg) {
+        colorClass = "text-green-600 font-semibold bg-[#c8e6c9] px-8 py-2 rounded-xl";
+    }
+    return <span className={colorClass}>{row.original.publicationsNo}</span>;
+}
 
 export const CellComponent = ({ row }) => {
     let navigate = useNavigate();
@@ -62,19 +75,19 @@ export const CellComponent = ({ row }) => {
                     </DropdownMenuContent>
                     {isDialogOpen && (
                         //<Dialog>
-                        <DialogContent className="sm:max-w-[425px] bg-slate-600">
+                        <DialogContent className="sm:max-w-[425px] bg-white">
                             <DialogHeader>
-                                <DialogTitle className="text-red-800 text-2xl font-bold">Confirm!</DialogTitle>
+                                <DialogTitle className="text-red-600 text-xl font-bold">Confirm!</DialogTitle>
                                 <DropdownMenuSeparator />
-                                <DialogTitle className="text-white text-2xl">Are you sure?</DialogTitle>
-                                <DialogDescription className="text-white">
+                                <DialogTitle className="text-gray-800 text-xl font-bold">Are you sure?</DialogTitle>
+                                <DialogDescription className="text-gray-800">
                                     This action will delete this rc center permanentely.
                                 </DialogDescription>
                             </DialogHeader>
                             <DropdownMenuSeparator className="text-gray-800" />
                             <DialogFooter>
-                                <Button type="button" className="text-white bg-red-500 hover:bg-red-600" onClick={handleDelete}>Yes</Button>
-                                <Button type="button" onClick={() => setIsDialogOpen(false)}>No</Button>
+                                <Button type="button" className="text-gray-800 hover:bg-red-600" onClick={handleDelete}>Yes</Button>
+                                <Button type="button" className="text-gray-800 hover:bg-red-600" onClick={() => setIsDialogOpen(false)}>No</Button>
                             </DialogFooter>
                         </DialogContent>
                         //</Dialog>
@@ -95,6 +108,8 @@ export const columns = [
     }),
     {
         accessorKey: "publicationsNo",
+        enableHiding: false,
+        cell: showPublicationColor,
         header: "Publications No",
     },
     {

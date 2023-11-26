@@ -29,8 +29,8 @@ const Forget = () => {
                 toast.error("Wrong Credentials 😢");
             }
             if (res.data.status) {
-                setLoading(false);
                 toast.success("Password changed successfully!! 😢");
+                setLoading(false);
                 navigate('/login')
             }
         } catch (error) {

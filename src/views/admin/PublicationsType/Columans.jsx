@@ -15,8 +15,8 @@ export const CellComponent = ({ row }) => {
 
     const handleDelete = () => {
         deletePublicationsType(row.original.publicationsTypeId).then((response) => {
-            console.log(response.data)
             if (response.data.status) {
+                setIsDialogOpen(false)
                 navigate('/admin-dashboard/publicationstype');
             }
         }).catch(error => {
@@ -61,19 +61,19 @@ export const CellComponent = ({ row }) => {
                     </DropdownMenuContent>
                     {isDialogOpen && (
                         //<Dialog>
-                        <DialogContent className="sm:max-w-[425px] bg-slate-600">
+                        <DialogContent className="sm:max-w-[425px] bg-white">
                             <DialogHeader>
-                                <DialogTitle className="text-red-800 text-2xl font-bold">Confirm!</DialogTitle>
+                                <DialogTitle className="text-red-600 text-xl font-bold">Confirm!</DialogTitle>
                                 <DropdownMenuSeparator />
-                                <DialogTitle className="text-white text-2xl">Are you sure?</DialogTitle>
-                                <DialogDescription className="text-white">
+                                <DialogTitle className="text-gray-800 text-xl font-bold">Are you sure?</DialogTitle>
+                                <DialogDescription className="text-gray-800 text-sm">
                                     This action will delete this rc center permanentely.
                                 </DialogDescription>
                             </DialogHeader>
                             <DropdownMenuSeparator className="text-gray-800" />
                             <DialogFooter>
-                                <Button type="button" className="text-white bg-red-500 hover:bg-red-600" onClick={handleDelete}>Yes</Button>
-                                <Button type="button" onClick={() => setIsDialogOpen(false)}>No</Button>
+                                <Button type="button" className="text-gray-800 hover:bg-red-600" onClick={handleDelete}>Yes</Button>
+                                <Button type="button" className="text-gray-800 hover:bg-green-600"  onClick={() => setIsDialogOpen(false)}>No</Button>
                             </DialogFooter>
                         </DialogContent>
                         //</Dialog>

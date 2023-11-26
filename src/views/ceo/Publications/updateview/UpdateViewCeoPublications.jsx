@@ -83,8 +83,7 @@ const UpdateViewCeoPublications = () => {
         publication.publicationsType.publicationsTypeId = publicationsTypeId;
         publication.rcCenter.rcCenterId = rcCenterId;
         const response = await updatePublications(publication).catch(console.log)
-        if (response?.data) {
-            console.log(response.data.data)
+        if (response?.data.status) {
             navigate("/ceo-dashboard/publications");
         }
     };
@@ -100,7 +99,7 @@ const UpdateViewCeoPublications = () => {
                         <CardContent>
                             <div className="grid w-full items-center gap-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
-
+                                    
                                     <Label htmlFor="publicationsNo" className="text-right text-slate-300 font-bold">Publication No</Label>
                                     <Input value={publication.publicationsNo} onChange={(e) => handleChange(e)} disabled={isDisabled} id="publicationsNo" name="publicationsNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
 

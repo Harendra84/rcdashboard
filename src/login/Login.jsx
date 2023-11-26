@@ -49,7 +49,6 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       toast.error("Something went wrong!!");
-      // setErrors(error);
       setLoading(false);
     }
   };

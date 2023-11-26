@@ -64,11 +64,10 @@ const UpdateViewAdminRcCenter = () => {
                     <form onSubmit={(e) => onSubmit(e)}>
                         <CardHeader>
                             <CardTitle>{title}</CardTitle>
-                            {/* <CardDescription>Deploy your new project in one-click.</CardDescription> */}
                         </CardHeader>
                         <CardContent>
                             <div className="grid w-full items-center gap-4">
-                                <div className="grid grid-cols-2 items-center gap-4">
+                                <div className="grid grid-cols-10 items-center gap-4">
                                     <Label htmlFor="rcCenterName" className="text-right text-slate-300 font-bold">Rc Center Name</Label>
                                     <Input value={rcCenter.rcCenterName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" id="rcCenterName" name="rcCenterName" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                     <Label htmlFor="totalMembers" className="text-right text-slate-300 font-bold">Total Members</Label>

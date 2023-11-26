@@ -71,7 +71,7 @@ const UpdateViewAdminPublicationsType = () => {
                         </CardHeader>
                         <CardContent>
                             <div className="grid w-full items-center gap-4">
-                                <div className="grid grid-cols-2 items-center gap-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Publications Type</Label>
                                     <Input value={publicationsType.publicationsName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" id="publicationsName" name="publicationsName" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                     <Label htmlFor="benchmarksNo" className="text-right text-slate-300 font-bold">Benchmarks No</Label>
