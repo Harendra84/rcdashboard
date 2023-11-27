@@ -6,7 +6,6 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getByPublicationsId } from '@/services/PublicationsService';
 import { getByPublicationsTypeId, updatePublicationsType } from '@/services/PublicationsType';
 
 function useQuery() {
@@ -72,10 +71,11 @@ const UpdateViewAdminPublicationsType = () => {
                         <CardContent>
                             <div className="grid w-full items-center gap-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Publications Type</Label>
-                                    <Input value={publicationsType.publicationsName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" id="publicationsName" name="publicationsName" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
-                                    <Label htmlFor="benchmarksNo" className="text-right text-slate-300 font-bold">Benchmarks No</Label>
-                                    <Input value={publicationsType.benchmarksNo} onChange={(e) => handleChange(e)} disabled={isDisabled} type="number" name="benchmarksNo" id="benchmarksNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Parameter Name</Label>
+                                    <Input value={publicationsType.publicationsName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" id="publicationsName" name="publicationsName" placeholder="Enter Parameter Name" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    
+                                    <Label htmlFor="benchmarksNo" className="text-right text-slate-300 font-bold">Benchmark No</Label>
+                                    <Input value={publicationsType.benchmarksNo} onChange={(e) => handleChange(e)} disabled={isDisabled} type="any" name="benchmarksNo" id="benchmarksNo" placeholder="Enter Benchmark No" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                 </div>
                             </div>
                         </CardContent>

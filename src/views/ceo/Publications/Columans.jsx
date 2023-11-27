@@ -102,23 +102,23 @@ const columnHelper = createColumnHelper();
 export const columns = [
 
     columnHelper.accessor("", {
-        accessorKey: "S.No",
-        cell: (info) => <span>{info.row.index + 1}</span>,
         header: "S.No",
+        accessorKey: "S.No",
+        cell: (info) => <span>{info.row.index + 1}</span>
     }),
     {
-        id: "Publications No",
+        header: "Rc Center",
+        accessorFn: row => row.rcCenter.rcCenterName
+    },
+    {
+        header: "Parameter Name",
+        accessorFn: row => row.publicationsType.publicationsName
+    },
+    {
+        header: "Parameter Value",
+        id: "parameter value",
         enableHiding: false,
         cell: showPublicationColor,
-        header: "Publications No",
-    },
-    {
-        accessorFn: row => row.publicationsType.publicationsName,
-        header: "Publications Type",
-    },
-    {
-        accessorFn: row => row.rcCenter.rcCenterName,
-        header: "Rc Center"
     },
     {
         header: "Actions",

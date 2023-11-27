@@ -25,7 +25,10 @@ const AuthGuard = ({ component }) => {
         navigate(`/ceo-dashboard`);
       } else if (user.roleType === userType.COORDINATOR) {
         navigate(`/coordinator-dashboard`);
-      } else {
+      } else if (user.roleType === userType.MANAGERE) {
+        navigate(`/manager-dashboard`);
+      }
+      else {
         navigate(`/login`);
       }
       setStatus(true);

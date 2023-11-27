@@ -62,7 +62,6 @@ export const CellComponent = ({ row }) => {
                     </DropdownMenuItem>
                 </DropdownMenuContent>
                 {isDialogOpen && (
-                    //<Dialog>
                     <DialogContent className="sm:max-w-[425px] bg-white">
                         <DialogHeader>
                             <DialogTitle className="text-red-600 text-xl font-bold">Confirm!</DialogTitle>
@@ -78,7 +77,6 @@ export const CellComponent = ({ row }) => {
                             <Button type="button" className="text-gray-800 hover:bg-green-600" onClick={() => setIsDialogOpen(false)}>No</Button>
                         </DialogFooter>
                     </DialogContent>
-                    //</Dialog>
                 )}
             </DropdownMenu>
         </Dialog>
@@ -126,8 +124,8 @@ export const columns = [
         header: "Status",
     },
     {
+        header: "RcCenter",
         accessorFn: row => row.rcCenter.rcCenterName,
-        header: "Rc Center"
     },
     {
         header: "Actons",

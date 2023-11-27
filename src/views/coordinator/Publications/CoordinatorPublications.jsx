@@ -80,35 +80,35 @@ const CoordinatorPublications = (props) => {
                     <div className="items-start justify-between md:flex mt-12">
                         <div className="max-w-lg">
                             <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
-                                Publications Table
+                            Parameters Table
                             </h3>
                         </div>
                         <div className="mt-3 md:mt-0">
                             <div className="mt-3 md:mt-0 flex gap-4">
                                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                                     <DialogTrigger asChild>
-                                        <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-800 md:text-sm">Add Publications</Button>
+                                        <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-800 md:text-sm">Add Parameters</Button>
                                     </DialogTrigger>
                                     <DialogContent className="sm:max-w-2xl" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
                                         <form onSubmit={(e) => onSubmit(e)}>
                                             <DialogHeader>
-                                                <DialogTitle className="text-white">Add Publication </DialogTitle>
+                                                <DialogTitle className="text-white">Add Parameter </DialogTitle>
                                             </DialogHeader>
                                             <div className="grid gap-4 py-4">
                                                 <div className="grid grid-cols-4 items-center gap-4">
-                                                    <Label htmlFor="publicationsNo" className="text-right text-slate-300 font-bold">Publication No</Label>
-                                                    <Input onChange={(e) => handleChange(e)} type="number" id="publicationsNo" name="publicationsNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                    <Label htmlFor="publicationsNo" className="text-right text-slate-300 font-bold">Parameter Value</Label>
+                                                    <Input onChange={(e) => handleChange(e)} type="number" id="publicationsNo" name="publicationsNo" placeholder="Enter Parameter Value" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
 
-                                                    <Label htmlFor="publicationsType" className="text-right text-slate-300 font-bold">Publication Type</Label>
+                                                    <Label htmlFor="publicationsType" className="text-right text-slate-300 font-bold">Parameter Name</Label>
                                                     <Select onValueChange={(value) => setPublicationsTypeId(value)} name="publicationsType" id="publicationsType" className="col-span-3 border-slate-300 ">
                                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
-                                                            <SelectValue placeholder="Select a publications type" />
+                                                            <SelectValue placeholder="Select Parameter Name" />
                                                         </SelectTrigger>
                                                         <SelectContent position="popper" className="bg-gray-800 text-white">
                                                             {
-                                                                publicationsTypes.length > 0 ? publicationsTypes.map((type) => (
-                                                                    <div className="" key={type.publicationsTypeId}>
-                                                                        <SelectItem value={type.publicationsTypeId}>{type.publicationsName}</SelectItem>
+                                                                publicationsTypes.length > 0 ? publicationsTypes.map((parameter) => (
+                                                                    <div className="" key={parameter.publicationsTypeId}>
+                                                                        <SelectItem value={parameter.publicationsTypeId}>{parameter.publicationsName}</SelectItem>
                                                                     </div>
                                                                 )) : null
                                                             }

@@ -48,28 +48,28 @@ const AdminPublicationsType = (props) => {
                     <div className="items-start justify-between md:flex mt-12">
                         <div className="max-w-lg">
                             <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
-                            Publications Type
+                            Parameters Tables
                             </h3>
                         </div>
                         <div className="mt-3 md:mt-0">
                             <div className="mt-3 md:mt-0 flex gap-4">
                                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                                     <DialogTrigger asChild>
-                                        <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-800 md:text-sm">Add Publications Type</Button>
+                                        <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-800 md:text-sm">Add Parameters</Button>
                                     </DialogTrigger>
                                     <DialogContent className="sm:max-w-2xl" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
                                         <form onSubmit={(e) => onSubmit(e)}>
                                             <DialogHeader>
-                                                <DialogTitle className="text-white">Add Publications Type </DialogTitle>
+                                                <DialogTitle className="text-white">Add Parameters</DialogTitle>
                                             </DialogHeader>
                                             <div className="grid gap-4 py-4">
                                                 <div className="grid grid-cols-2 items-center gap-4">
-                                                    <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Publications Type</Label>
-                                                    <Input onChange={(e) => handleChange(e)} id="publicationsName" name="publicationsName" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                    <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Parameter Name</Label>
+                                                    <Input onChange={(e) => handleChange(e)} type="text" id="publicationsName" name="publicationsName" placeholder="Enter Parameter Name" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                 </div>
                                                 <div className="grid grid-cols-2 items-center gap-4">
                                                     <Label htmlFor="benchmarksNo" className="text-right text-slate-300 font-bold">Benchmarks No</Label>
-                                                    <Input onChange={(e) => handleChange(e)} type="any" id="benchmarksNo" name="benchmarksNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                    <Input onChange={(e) => handleChange(e)} type="any" id="benchmarksNo" name="benchmarksNo" placeholder="Enter Benchmark No" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                 </div>
                                             </div>
                                             <DialogFooter>

@@ -55,8 +55,9 @@ const AdminUser = (props) => {
 
     useEffect(() => {
 
-        //rc center list 
-        rcCenterLists().then((response) => {
+        // rc center list 
+         rcCenterLists().then((response) => {
+            console.log(response.data.listOfData)
             setRcCenters(response.data.listOfData);
         }).catch(error => {
             console.log(error)
@@ -80,7 +81,7 @@ const AdminUser = (props) => {
 
     // filter user admin, or ceo, coordinator
     const filterData = modifiedData.filter((value) => {
-        return value.roleType !== "ADMIN"
+        return value.roleType !== "ADMIN" && value.roleType !== "MANAGER"
     });
 
     return (

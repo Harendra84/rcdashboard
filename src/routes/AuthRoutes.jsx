@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import AuthGuard from "../guards/AuthGuards";
 import Error from "../error/Error";
 
-import { AdminAccess, CeoAccess, CoordinatorAccess } from './pathAccess';
+import { AdminAccess, CeoAccess, CoordinatorAccess, ManagerAccess } from './pathAccess';
 import Layout from "@/layout/Layout";
 import AdminDashboard from "@/views/admin/Dashboard/AdminDashboard";
 import AdminUser from "@/views/admin/User/AdminUser";
@@ -21,9 +21,12 @@ import CoordinatorDashboard from "@/views/coordinator/Dashboard/CoordinatorDashb
 import CoordinatorPublications from "@/views/coordinator/Publications/CoordinatorPublications";
 import UpdateViewCoordinatorPublications from "@/views/coordinator/Publications/updateview/UpdateViewCoordinatorPublications";
 
+import ManagerDashboard from "@/views/Manager/Dashboard/ManagerDashboard";
+import ManagerPublicationsType from "@/views/Manager/PublicationType/ManagerPublicationsType";
+import ManagerPublications from "@/views/Manager/Publications/ManagerPublications";
+
 const AuthRoutes = [
 
-  // <Route key="Dashboard" path="/" element={<AuthGuard component={<AdminDashboard />} />} />,
   <Route key="Dashboard" path="/admin-dashboard/*" element={<AuthGuard component={
     <React.Fragment>
       <Layout accessRoutes={AdminAccess}>
@@ -59,6 +62,18 @@ const AuthRoutes = [
           <Route path="/" element={<CoordinatorDashboard />} />
           <Route path="/publications" element={<CoordinatorPublications />} />
           <Route path="/publications/manage/:publicationsId" element={<UpdateViewCoordinatorPublications />} />
+        </Routes>
+      </Layout>
+    </React.Fragment>
+  } />} />,
+
+  <Route key="Manager" path="/manager-dashboard/*" element={<AuthGuard component={
+    <React.Fragment>
+      <Layout accessRoutes={ManagerAccess}>
+        <Routes>
+          <Route path="/" element={<ManagerDashboard />} />
+          <Route path="/publicationstype" element={<ManagerPublicationsType />} />
+          <Route path="/publications" element={<ManagerPublications />} />
         </Routes>
       </Layout>
     </React.Fragment>

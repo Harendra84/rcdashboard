@@ -10,4 +10,5 @@ export const userType = {
     ADMIN: "ADMIN",
     CEO: "CEO",
     COORDINATOR: "COORDINATOR",
+    MANAGERE: "MANAGER"
 }

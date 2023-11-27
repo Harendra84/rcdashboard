@@ -1,4 +1,4 @@
-import {BsGridFill, BsPersonAdd } from "react-icons/bs";
+import { BsGridFill, BsPersonAdd } from "react-icons/bs";
 
 export const AdminAccess = [
   {
@@ -12,12 +12,12 @@ export const AdminAccess = [
     iconName: <BsPersonAdd className='icon' />
   },
   {
-    name: "Rc Center",
+    name: "RcCenter",
     link: "/admin-dashboard/rccenter",
     iconName: <BsPersonAdd className='icon' />
   },
   {
-    name: "Publications Type",
+    name: "Parameters",
     link: "/admin-dashboard/publicationstype",
     iconName: <BsPersonAdd className='icon' />
   },
@@ -29,20 +29,47 @@ export const CeoAccess = [
     iconName: <BsGridFill className='icon' />
   },
   {
-    name: "Publications",
+    name: "Parameters",
+    link: "/ceo-dashboard/publicationstype",
+    iconName: <BsPersonAdd className='icon' />
+  },
+  {
+    name: "Performances",
     link: "/ceo-dashboard/publications",
     iconName: <BsGridFill className='icon' />
   },
 ]
 export const CoordinatorAccess = [
   {
-    name: "DashBoard",
+    name: "Dashboard",
     link: "/coordinator-dashboard",
     iconName: <BsGridFill className='icon' />
   },
   {
-    name: "Publications",
+    name: "Parameters",
+    link: "/coordinator-dashboard/publicationstype",
+    iconName: <BsPersonAdd className='icon' />
+  },
+  {
+    name: "Performances",
     link: "/coordinator-dashboard/publications",
     iconName: <BsGridFill className='icon' />
+  },
+]
+export const ManagerAccess = [
+  {
+    name: "Dashboard",
+    link: "/manager-dashboard",
+    iconName: <BsGridFill className='icon' />
+  },
+  {
+    name: "Parameters",
+    link: "/manager-dashboard/publicationstype",
+    iconName: <BsPersonAdd className='icon' />
+  },
+  {
+    name: "Performances",
+    link: "/manager-dashboard/publications",
+    iconName: <BsPersonAdd className='icon' />
   },
 ]

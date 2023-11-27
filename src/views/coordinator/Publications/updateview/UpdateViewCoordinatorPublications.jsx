@@ -23,7 +23,7 @@ const UpdateViewCoordinatorPublications = () => {
     const [publicationsTypeId, setPublicationsTypeId] = useState();
     const [rcCenters, setRcCenters] = useState([]);
     const [rcCenterId, setRcCenterId] = useState();
-    const [title, setTitle] = useState("Update Publications");
+    const [title, setTitle] = useState("Update Parameters");
     const [isDisabled, setIsDisabled] = useState(false);
     const query = useQuery();
     const params = useParams();
@@ -48,7 +48,7 @@ const UpdateViewCoordinatorPublications = () => {
 
         if (!query.get('updatecall')) {
             setIsDisabled(true)
-            setTitle("View Details of Publications")
+            setTitle("View Details of Parameters")
         }
         //publications type list 
         publicationsTypeLists().then((response) => {
@@ -101,13 +101,13 @@ const UpdateViewCoordinatorPublications = () => {
                             <div className="grid w-full items-center gap-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
 
-                                    <Label htmlFor="publicationsNo" className="text-right text-slate-300 font-bold">Publication No</Label>
-                                    <Input value={publication.publicationsNo} onChange={(e) => handleChange(e)} disabled={isDisabled} id="publicationsNo" name="publicationsNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Label htmlFor="publicationsNo" className="text-right text-slate-300 font-bold">Parameter Value</Label>
+                                    <Input value={publication.publicationsNo} onChange={(e) => handleChange(e)} disabled={isDisabled} id="publicationsNo" name="publicationsNo" placeholder="Select Parameter Value" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
 
-                                    <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Publication Name</Label>
+                                    <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Parameter Name</Label>
                                     <Select value={publicationsTypeId} onValueChange={(value) => setPublicationsTypeId(value)} disabled={isDisabled} name="publicationsName" id="publicationsName" className="col-span-3 border-slate-300 ">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
-                                            <SelectValue placeholder="Select Rc Center" />
+                                            <SelectValue placeholder="Select Parameter Name" />
                                         </SelectTrigger>
                                         <SelectContent position="popper" className="bg-gray-800 text-white">
                                             {

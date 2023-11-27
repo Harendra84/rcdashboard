@@ -39,8 +39,12 @@ const Login = () => {
           return navigate("/ceo-dashboard");
         } else if (res.data.data.roleType === "COORDINATOR") {
           toast.success("Coordinator login successfully!!");
-          return navigate("/coordinator-dashboard");
-        } else {
+          return navigate("/manager-dashboard");
+        }else if (res.data.data.roleType === "MANAGER") {
+          toast.success("manager login successfully!!");
+          return navigate("/manager-dashboard");
+        } 
+        else {
           toast.error("Something went wrong!");
           return navigate(0);
         }

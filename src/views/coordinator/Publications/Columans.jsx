@@ -74,7 +74,6 @@ export const CellComponent = ({ row }) => {
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                     {isDialogOpen && (
-                        //<Dialog>
                         <DialogContent className="sm:max-w-[425px] bg-white">
                             <DialogHeader>
                                 <DialogTitle className="text-red-600 text-xl font-bold">Confirm!</DialogTitle>
@@ -90,7 +89,6 @@ export const CellComponent = ({ row }) => {
                                 <Button type="button" className="text-gray-800 hover:bg-red-600" onClick={() => setIsDialogOpen(false)}>No</Button>
                             </DialogFooter>
                         </DialogContent>
-                        //</Dialog>
                     )}
                 </DropdownMenu>
             </Dialog>
@@ -102,25 +100,26 @@ const columnHelper = createColumnHelper();
 export const columns = [
 
     columnHelper.accessor("", {
-        accessorKey: "S.No",
-        cell: (info) => <span>{info.row.index + 1}</span>,
         header: "S.No",
+        accessorKey: "S.No",
+        cell: (info) => <span>{info.row.index + 1}</span>
     }),
     {
-        accessorKey: "publicationsNo",
+        header: "Rc Center",
+        accessorFn: row => row.rcCenter.rcCenterName,
+    },
+    {
+        header: "Parameter Name",
+        accessorFn: row => row.publicationsType.publicationsName
+    },
+    {
+        header: "Parameter Value",
+        id: "parameter value",
         enableHiding: false,
         cell: showPublicationColor,
-        header: "Publications No",
     },
     {
-        accessorFn: row => row.publicationsType.publicationsName,
-        header: "Publications Type",
-    },
-    {
-        accessorFn: row => row.rcCenter.rcCenterName,
-        header: "Rc Center"
-    },
-    {
+        header: "Actions",
         id: "actions",
         enableHiding: false,
         cell: CellComponent
