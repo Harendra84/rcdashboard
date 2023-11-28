@@ -1,10 +1,15 @@
-import { BsGridFill, BsPersonAdd } from "react-icons/bs";
+import { PiChatCenteredText } from "react-icons/pi";
+import { MdDashboard } from "react-icons/md";
+import {BsPersonAdd } from "react-icons/bs";
+import { FcSalesPerformance } from "react-icons/fc";
+import { RiNumbersLine } from "react-icons/ri";
+import { FaUserCircle } from "react-icons/fa";
 
 export const AdminAccess = [
   {
     name: "Dashboard",
     link: "/admin-dashboard",
-    iconName: <BsGridFill className='icon' />
+    iconName: <MdDashboard  className='icon' />
   },
   {
     name: "User",
@@ -14,62 +19,72 @@ export const AdminAccess = [
   {
     name: "RcCenter",
     link: "/admin-dashboard/rccenter",
-    iconName: <BsPersonAdd className='icon' />
+    iconName: <PiChatCenteredText  className='icon' />
   },
   {
     name: "Parameters",
     link: "/admin-dashboard/publicationstype",
-    iconName: <BsPersonAdd className='icon' />
+    iconName: <RiNumbersLine className='icon' />
+  },
+  {
+    name: "Profile",
+    link: "/admin-dashboard/profile",
+    iconName: <FaUserCircle className='icon' />
   },
 ]
 export const CeoAccess = [
   {
     name: "Dashboard",
     link: "/ceo-dashboard",
-    iconName: <BsGridFill className='icon' />
-  },
-  {
-    name: "Parameters",
-    link: "/ceo-dashboard/publicationstype",
-    iconName: <BsPersonAdd className='icon' />
+    iconName: <MdDashboard  className='icon' />
   },
   {
     name: "Performances",
     link: "/ceo-dashboard/publications",
-    iconName: <BsGridFill className='icon' />
+    iconName: <FcSalesPerformance className='icon' />
+  },
+  {
+    name: "Profile",
+    link: "/ceo-dashboard/profile",
+    iconName: <FaUserCircle className='icon' />
   },
 ]
 export const CoordinatorAccess = [
   {
     name: "Dashboard",
     link: "/coordinator-dashboard",
-    iconName: <BsGridFill className='icon' />
-  },
-  {
-    name: "Parameters",
-    link: "/coordinator-dashboard/publicationstype",
-    iconName: <BsPersonAdd className='icon' />
+    iconName: <MdDashboard  className='icon' />
   },
   {
     name: "Performances",
     link: "/coordinator-dashboard/publications",
-    iconName: <BsGridFill className='icon' />
+    iconName: <FcSalesPerformance  className='icon' />
+  },
+  {
+    name: "Profile",
+    link: "/coordinator-dashboard/profile",
+    iconName: <FaUserCircle className='icon' />
   },
 ]
 export const ManagerAccess = [
   {
     name: "Dashboard",
     link: "/manager-dashboard",
-    iconName: <BsGridFill className='icon' />
+    iconName: <MdDashboard  className='icon' />
   },
   {
     name: "Parameters",
     link: "/manager-dashboard/publicationstype",
-    iconName: <BsPersonAdd className='icon' />
+    iconName: <RiNumbersLine className='icon' />
   },
   {
     name: "Performances",
     link: "/manager-dashboard/publications",
-    iconName: <BsPersonAdd className='icon' />
+    iconName: <FcSalesPerformance className='icon' />
+  },
+  {
+    name: "Profile",
+    link: "/manager-dashboard/profile",
+    iconName: <FaUserCircle className='icon' />
   },
 ]

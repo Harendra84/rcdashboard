@@ -105,15 +105,23 @@ export const columns = [
         cell: (info) => <span>{info.row.index + 1}</span>
     }),
     {
-        header: "Rc Center",
+        header: "Rc Centers",
         accessorFn: row => row.rcCenter.rcCenterName,
     },
     {
-        header: "Parameter Name",
+        header: "Parameters Name",
         accessorFn: row => row.publicationsType.publicationsName
     },
     {
-        header: "Parameter Value",
+        header: "Benchmarks No",
+        accessorFn: row => row.publicationsType.benchmarksNo
+    },
+    {
+        header: "Total Members",
+        accessorFn: row => row.rcCenter.totalMembers,
+    },
+    {
+        header: "Parameters Value",
         id: "parameter value",
         enableHiding: false,
         cell: showPublicationColor,

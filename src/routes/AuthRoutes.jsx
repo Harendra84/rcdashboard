@@ -24,6 +24,7 @@ import UpdateViewCoordinatorPublications from "@/views/coordinator/Publications/
 import ManagerDashboard from "@/views/Manager/Dashboard/ManagerDashboard";
 import ManagerPublicationsType from "@/views/Manager/PublicationType/ManagerPublicationsType";
 import ManagerPublications from "@/views/Manager/Publications/ManagerPublications";
+import Profile from "@/components/Profile";
 
 const AuthRoutes = [
 
@@ -38,6 +39,7 @@ const AuthRoutes = [
           <Route path="/rccenter/manage/:rcCenterId" element={<UpdateViewAdminRcCenter />} />
           <Route path="/publicationstype" element={<AdminPublicationsType />} />
           <Route path="/publicationstype/manage/:publicationsTypeId" element={<UpdateViewAdminPublicationsType />} />
+          <Route path="/profile" element={<Profile/>}/>
         </Routes>
       </Layout>
     </React.Fragment>
@@ -50,6 +52,7 @@ const AuthRoutes = [
           <Route path="/" element={<CeoDashboard />} />
           <Route path="/publications" element={<CeoPublications />} />
           <Route path="/publications/manage/:publicationsId" element={<UpdateViewCeoPublications />} />
+          <Route path="/profile" element={<Profile/>}/>
         </Routes>
       </Layout>
     </React.Fragment>
@@ -62,6 +65,7 @@ const AuthRoutes = [
           <Route path="/" element={<CoordinatorDashboard />} />
           <Route path="/publications" element={<CoordinatorPublications />} />
           <Route path="/publications/manage/:publicationsId" element={<UpdateViewCoordinatorPublications />} />
+          <Route path="/profile" element={<Profile/>}/>
         </Routes>
       </Layout>
     </React.Fragment>
@@ -74,6 +78,7 @@ const AuthRoutes = [
           <Route path="/" element={<ManagerDashboard />} />
           <Route path="/publicationstype" element={<ManagerPublicationsType />} />
           <Route path="/publications" element={<ManagerPublications />} />
+          <Route path="/profile" element={<Profile/>}/>
         </Routes>
       </Layout>
     </React.Fragment>
