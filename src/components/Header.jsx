@@ -8,6 +8,18 @@ function Header({ OpenSidebar, accessRoutes }) {
         <div className="capitalize">
           <nav aria-label="breadcrumb" className="w-max">
             <ol className="flex flex-wrap items-center w-full bg-opacity-60 rounded-md bg-transparent p-0 transition-all gap-2">
+            {
+                accessRoutes.length > 0 ? accessRoutes.map((value, index) => (
+                  <li key={index} className="flex items-center text-blue-gray-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
+                    <Link aria-current="page" className="active" to={value.link}>
+                      <p className="block antialiased font-sans text-sm leading-normal text-blue-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">
+                        {value.name}
+                      </p>
+                    </Link>
+                  </li>
+                )
+                ) : <></>
+              }
               {/* <li className="flex items-center text-blue-gray-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
                 <a href="#">
                   <p
@@ -25,18 +37,6 @@ function Header({ OpenSidebar, accessRoutes }) {
                   home
                 </p>
               </li> */}
-              {
-                accessRoutes.length > 0 ? accessRoutes.map((value, index) => (
-                  <li key={index} className="flex items-center text-blue-gray-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
-                    <Link aria-current="page" className="active" to={value.link}>
-                      <p className="block antialiased font-sans text-sm leading-normal text-blue-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">
-                        {value.name}
-                      </p>
-                    </Link>
-                  </li>
-                )
-                ) : <></>
-              }
             </ol>
           </nav>
           <h6
