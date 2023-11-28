@@ -17,12 +17,12 @@ export const AdminAccess = [
     iconName: <BsPersonAdd className='icon' />
   },
   {
-    name: "RcCenter",
+    name: "RCCenter",
     link: "/admin-dashboard/rccenter",
     iconName: <PiChatCenteredText  className='icon' />
   },
   {
-    name: "Parameters",
+    name: "Parameter",
     link: "/admin-dashboard/publicationstype",
     iconName: <RiNumbersLine className='icon' />
   },
@@ -39,7 +39,7 @@ export const CeoAccess = [
     iconName: <MdDashboard  className='icon' />
   },
   {
-    name: "Performances",
+    name: "Performance",
     link: "/ceo-dashboard/publications",
     iconName: <FcSalesPerformance className='icon' />
   },
@@ -56,7 +56,7 @@ export const CoordinatorAccess = [
     iconName: <MdDashboard  className='icon' />
   },
   {
-    name: "Performances",
+    name: "Performance",
     link: "/coordinator-dashboard/publications",
     iconName: <FcSalesPerformance  className='icon' />
   },
@@ -73,12 +73,12 @@ export const ManagerAccess = [
     iconName: <MdDashboard  className='icon' />
   },
   {
-    name: "Parameters",
+    name: "Parameter",
     link: "/manager-dashboard/publicationstype",
     iconName: <RiNumbersLine className='icon' />
   },
   {
-    name: "Performances",
+    name: "Performance",
     link: "/manager-dashboard/publications",
     iconName: <FcSalesPerformance className='icon' />
   },

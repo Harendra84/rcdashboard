@@ -19,14 +19,14 @@ const Profile = () => {
         <div className="grid w-full gap-4">
           <div className="grid grid-cols-1 gap-8 mx-auto">
             <div className="">
-              <Card className="w-[400px]" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
+              <Card className="w-[400px] h-[400px] rounded-full" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
                 <CardHeader className="flex justify-center items-center">
                   <Avatar>
                     <AvatarImage src="/avataaars.svg" alt="@shadcn" />
                     <AvatarFallback>{ }</AvatarFallback>
                   </Avatar>
                   <CardTitle>{title}</CardTitle>
-                  <CardDescription>Login Details</CardDescription>
+                  <CardDescription>Login Profile Details</CardDescription>
                 </CardHeader>
                 <CardContent className="grid grid-cols-1 gap-1 mx-auto">
                   <div className="flex items-center mx-auto">

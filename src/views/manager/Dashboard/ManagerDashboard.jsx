@@ -80,7 +80,7 @@ function ManagerDashboard(props) {
             </div>
             <div className="border-t border-blue-gray-50 p-4">
               <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                <strong className="text-green-500">All active</strong>&nbsp;user&apos;s
+                <strong className="text-green-500">Total active</strong>&nbsp;user&apos;s
               </p>
             </div>
           </div>
@@ -100,7 +100,7 @@ function ManagerDashboard(props) {
             </div>
             <div className="p-4 text-right">
               <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-                RcCenter&apos;s
+                RC Center&apos;s
               </p>
               <h4
                 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
@@ -109,7 +109,7 @@ function ManagerDashboard(props) {
             </div>
             <div className="border-t border-blue-gray-50 p-4">
               <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                <strong className="text-green-500">All active</strong>&nbsp;rc center&apos;s
+                <strong className="text-green-500">Total active</strong>&nbsp;RC center&apos;s
               </p>
             </div>
           </div>
@@ -130,7 +130,7 @@ function ManagerDashboard(props) {
             </div>
             <div className="border-t border-blue-gray-50 p-4">
               <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                <strong className="text-red-500">All updated</strong>&nbsp;publication&apos;s type
+                <strong className="text-red-500">Total updated</strong>&nbsp;parameter&apos;s
               </p>
             </div>
           </div>
@@ -151,7 +151,7 @@ function ManagerDashboard(props) {
             </div>
             <div className="border-t border-blue-gray-50 p-4">
               <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                <strong className="text-red-500">All updated</strong>&nbsp;publication&apos;s
+                <strong className="text-red-500">Total updated</strong>&nbsp;performance&apos;s
               </p>
             </div>
           </div>

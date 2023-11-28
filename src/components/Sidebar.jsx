@@ -18,7 +18,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                 <a className="flex items-center gap-4 py-6 px-8" href="#/">
                     <h6
                         className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-white">
-                        Rc Dashboard
+                        RC Dashboard
                     </h6>
                 </a>
                 <button
