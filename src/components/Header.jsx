@@ -39,10 +39,10 @@ function Header({ OpenSidebar, accessRoutes }) {
               </li> */}
             </ol>
           </nav>
-          <h6
+          {/* <h6
             className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-gray-900">
             home
-          </h6>
+          </h6> */}
         </div>
         <div className="flex items-center">
           <div className="mr-auto md:mr-4 md:w-56">
