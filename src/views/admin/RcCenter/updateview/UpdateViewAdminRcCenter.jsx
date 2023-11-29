@@ -53,6 +53,7 @@ const UpdateViewAdminRcCenter = () => {
         e.preventDefault();
         const response = await updateRcCenter(rcCenter).catch(console.log)
         if (response?.data?.status) {
+            toast.success("Update RC Center successfully!!👍");
             navigate("/admin-dashboard/rcCenter");
         }
     };

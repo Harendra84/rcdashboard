@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { rcCenterLists } from '@/services/RcCenterService';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AdminUser = (props) => {
 
@@ -15,6 +16,7 @@ const AdminUser = (props) => {
     const [rcCenters, setRcCenters] = useState([]);
     const [rcCenterId, setRcCenterId] = useState();
     const [roleType, setRoleType] = useState("UNDEFINED");
+    const [campus, setCampus] = useState("");
     const [active, setActive] = useState();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -36,28 +38,28 @@ const AdminUser = (props) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
-    // add and update user
+    // add user
     const onSubmit = async (e) => {
         e.preventDefault();
         user.rcCenter.rcCenterId = parseInt(rcCenterId);
         user.roleType = roleType;
+        user.campus = campus;
 
         let isStatus = active === "true" ? true : false;
         const updatedUser = { ...user, 'active': isStatus }
-
         const response = addUser(updatedUser).catch(console.log);
 
         if (response?.data?.status) {
             setIsDialogOpen(false)
             setUsers([...users, response.data.data])
+            toast.success("Added user successfully!!👍");
         }
     };
 
     useEffect(() => {
 
         // rc center list 
-         rcCenterLists().then((response) => {
-            console.log(response.data.listOfData)
+        rcCenterLists().then((response) => {
             setRcCenters(response.data.listOfData);
         }).catch(error => {
             console.log(error)
@@ -66,6 +68,7 @@ const AdminUser = (props) => {
         //user list 
         userLists().then((response) => {
             setUsers(response.data.listOfData);
+            toast.success("Fetch users successfully!!👍");
         }).catch(error => {
             console.log(error)
         })
@@ -86,6 +89,7 @@ const AdminUser = (props) => {
 
     return (
         <>
+        <Toaster/>
             <div className='main-container'>
                 <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                     <div className="items-start justify-between md:flex mt-12">
@@ -106,16 +110,29 @@ const AdminUser = (props) => {
                                             <DialogTitle className="text-white">New User </DialogTitle>
                                         </DialogHeader>
                                         <div className="grid gap-4 py-4">
+
                                             <div className="grid grid-cols-8 items-center gap-4">
                                                 <Label htmlFor="fullName" className="text-right text-slate-300 font-bold">Full Name</Label>
                                                 <Input onChange={(e) => handleChange(e)} name="fullName" type="text" id="fullname" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                 <Label htmlFor="username" className="text-right text-slate-300 font-bold">Username</Label>
-                                                <Input onChange={(e) => handleChange(e)}  type="text" name="username" id="username" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                <Input onChange={(e) => handleChange(e)} type="text" name="username" id="username" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                             </div>
 
                                             <div className="grid grid-cols-8 items-center gap-4">
                                                 <Label htmlFor="campus" className="text-right text-slate-300 font-bold">Campus</Label>
-                                                <Input onChange={(e) => handleChange(e)} name="campus" id="campus" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                <Select onValueChange={(value) => setCampus(value)} type="text" name="campus" id="campus" className="col-span-3 border-slate-300">
+                                                    <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
+                                                        <SelectValue placeholder="Select Campus" />
+                                                    </SelectTrigger>
+                                                    <SelectContent className="bg-gray-800 text-white" >
+                                                        <SelectGroup>
+                                                            <SelectLabel>Campus</SelectLabel>
+                                                            <SelectItem value="PKD">PKD</SelectItem>
+                                                            <SelectItem value="BBSR">BBSR</SelectItem>
+                                                            <SelectItem value="VIZAG">VIZAG</SelectItem>
+                                                        </SelectGroup>
+                                                    </SelectContent>
+                                                </Select>
                                                 <Label htmlFor="designation" className="text-right text-slate-300 font-bold">Designation</Label>
                                                 <Input onChange={(e) => handleChange(e)} type="text" name="designation" id="designation" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                             </div>
@@ -124,7 +141,7 @@ const AdminUser = (props) => {
                                                 <Label htmlFor="department" className="text-right text-slate-300 font-bold">Department</Label>
                                                 <Input onChange={(e) => handleChange(e)} type="text" name="department" id="department" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                 <Label htmlFor="emailId" className="text-right text-slate-300 font-bold">Email Id</Label>
-                                                <Input onChange={(e) => handleChange(e)} type="text" name="emailId" id="emailId" className="col-span-3 border-slate-300 focus:outline-none outline-none bg-gray-800 text-white" />
+                                                <Input onChange={(e) => handleChange(e)} type="email" name="emailId" id="emailId" className="col-span-3 border-slate-300 focus:outline-none outline-none bg-gray-800 text-white" />
                                             </div>
 
                                             <div className="grid grid-cols-8 items-center gap-4">
@@ -134,7 +151,7 @@ const AdminUser = (props) => {
                                                 <Label htmlFor="roleType" className="text-right text-slate-300 font-bold">Role Type</Label>
                                                 <Select onValueChange={(value) => setRoleType(value)} type="text" name="roleType" id="roleType" className="col-span-3 border-slate-300">
                                                     <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
-                                                        <SelectValue placeholder="Select a role" />
+                                                        <SelectValue placeholder="Select Role Type" />
                                                     </SelectTrigger>
                                                     <SelectContent className="bg-gray-800 text-white" >
                                                         <SelectGroup>

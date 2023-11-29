@@ -3,6 +3,7 @@ import { publicationsTypeLists } from '@/services/PublicationsType';
 import { rcCenterLists } from '@/services/RcCenterService';
 import { userLists } from '@/services/UserService';
 import { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { FcSalesPerformance } from "react-icons/fc";
 import { RiNumbersLine } from "react-icons/ri";
 
@@ -32,14 +33,14 @@ function AdminDashboard(props) {
     // publications type count
     publicationsTypeLists().then((response) => {
       setPublicationsType(response.data.listOfData);
-    }).catch(error =>{
+    }).catch(error => {
       console.log(error);
     })
 
     // publications count
     publicationsLists().then((response) => {
       setPublications(response.data.listOfData);
-    }).catch(error =>{
+    }).catch(error => {
       console.log(error);
     })
 
@@ -52,12 +53,13 @@ function AdminDashboard(props) {
 
   return (
     <>
+    <Toaster/>
       <div className="mt-12">
-         {/* <!-- dashboard menu start --> */}
+        {/* <!-- dashboard menu start --> */}
         <div className="mb-12 grid gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-2">
           {/* user count */}
           <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
-          <div
+            <div
               className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                 className="w-6 h-6 text-white">
@@ -80,11 +82,11 @@ function AdminDashboard(props) {
               </p>
             </div>
           </div>
-            {/* rc center count */}
+          {/* rc center count */}
           <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div
               className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-pink-600 to-pink-400 text-white shadow-pink-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                 className="w-6 h-6 text-white">
                 <path d="M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z" />
                 <path fillRule="evenodd"
@@ -109,15 +111,15 @@ function AdminDashboard(props) {
               </p>
             </div>
           </div>
-           {/* Parameter type count */}
+          {/* Parameter type count */}
           <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div
               className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-yellow-600 to-yellow-400 text-white shadow-yellow-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-              <RiNumbersLine className='icon'/>
+              <RiNumbersLine className='icon' />
             </div>
             <div className="p-4 text-right">
               <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-              Parameter&apos;s
+                Parameter&apos;s
               </p>
               <h4
                 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">
@@ -126,19 +128,19 @@ function AdminDashboard(props) {
             </div>
             <div className="border-t border-blue-gray-50 p-4">
               <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                <strong className="text-red-500">Total updated</strong>&nbsp;parameter&apos;s 
+                <strong className="text-red-500">Total updated</strong>&nbsp;parameter&apos;s
               </p>
             </div>
           </div>
-           {/* Performance count */}
+          {/* Performance count */}
           <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
             <div
-               className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-purple-600 to-purple-400 text-white shadow-purple-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
-               <FcSalesPerformance className='icon' />
+              className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-purple-600 to-purple-400 text-white shadow-purple-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+              <FcSalesPerformance className='icon' />
             </div>
             <div className="p-4 text-right">
               <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">
-              Performance&apos;s
+                Performance&apos;s
               </p>
               <h4
                 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">

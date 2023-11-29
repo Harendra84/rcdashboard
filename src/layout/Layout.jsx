@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar';
 import { useState } from "react";
 import PropTypes from 'prop-types'
 import Footer from "@/components/Footer";
+import Profile from "@/components/Profile";
 
 const Layout = ({ accessRoutes, children }) => {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
@@ -16,7 +17,7 @@ const Layout = ({ accessRoutes, children }) => {
       <div className="min-h-screen bg-gray-50/50 relative">
         <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} accessRoutes={accessRoutes} />
         <div className="p-4 xl:ml-80">
-          <Header OpenSidebar={OpenSidebar} openSidebarToggle={openSidebarToggle} accessRoutes={accessRoutes}/>
+          <Header OpenSidebar={OpenSidebar} openSidebarToggle={openSidebarToggle} profile={Profile}/>
           {children}
           <div className="h-16"></div>
           <div className="text-blue-gray-600 absolute bottom-0 right-0 left-80">
@@ -34,18 +35,3 @@ Layout.propTypes = {
 }
 
 export default Layout;
-
-
-/* 
-<div className="min-h-screen bg-gray-50/50 flex flex-col">
-        <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} accessRoutes={accessRoutes} />
-        <div className="p-4 xl:ml-80 flex-1">
-          <Header OpenSidebar={OpenSidebar} openSidebarToggle={openSidebarToggle} />
-          {children}
-        </div>
-        <div className="text-blue-gray-600">
-          <Footer />
-        </div>
-      </div>
-
-*/

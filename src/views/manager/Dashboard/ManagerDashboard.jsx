@@ -3,6 +3,7 @@ import { publicationsTypeLists } from '@/services/PublicationsType';
 import { rcCenterLists } from '@/services/RcCenterService';
 import { userLists } from '@/services/UserService';
 import { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { FcSalesPerformance } from "react-icons/fc";
 import { RiNumbersLine } from "react-icons/ri";
 
@@ -52,6 +53,7 @@ function ManagerDashboard(props) {
 
   return (
     <>
+    <Toaster/>
       <div className="mt-12">
         {/* <!-- dashboard menu start --> */}
         <div className="mb-12 grid gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-2">

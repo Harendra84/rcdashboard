@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { addRcCenter, rcCenterLists, updateRcCenter } from '@/services/RcCenterService';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AdminRcCenter = (props) => {
 
@@ -23,19 +24,20 @@ const AdminRcCenter = (props) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
-        const response =  await addRcCenter(rcCenter).catch(console.log);
-
-        if (response?.data) {
+        const response = await addRcCenter(rcCenter).catch(console.log);
+        if (response?.data.status) {
             setIsDialogOpen(false)
-            setRcCenters([ ...rcCenters, response.data.data])
+            setRcCenters([...rcCenters, response.data.data])
+            toast.success("Added RC Center successfully!!👍");
         }
     };
 
+    
     // rc center list
     useEffect(() => {
         rcCenterLists().then((response) => {
             setRcCenters(response.data.listOfData);
+            toast.success("Fetch RC Centers successfully!!👍");
         }).catch(error => {
             console.log(error)
         })
@@ -43,6 +45,7 @@ const AdminRcCenter = (props) => {
 
     return (
         <>
+            <Toaster />
             <div className='main-container'>
                 <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                     <div className="items-start justify-between md:flex mt-12">

@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import { FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import toast, { Toaster } from 'react-hot-toast';
 
 function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
 
     const navigate = useNavigate();
     const handleLogOut = () => {
         localStorage.removeItem("userInfo");
+        toast.success('Logout successfully!!😔');
         navigate('/login');
     }
-
     return (
+        <>
         <aside
             className={`${openSidebarToggle ? '-translate-x-80' : ''} bg-gradient-to-br from-gray-800 to-gray-900  fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0`}>
             <div className="relative border-b border-white/20">
@@ -62,7 +64,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                             auth pages
                         </p>
                     </li>
-                    <li>
+                    {/* <li>
                         <button
                             className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                             type="button">
@@ -72,11 +74,9 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                                 profile
                             </p>
                         </button>
-                    </li>
+                    </li> */}
                     <li>
-                        <button
-                            onClick={() => handleLogOut()}
-                            className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                        <button onClick={() => handleLogOut()} className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                             type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
                                 className="w-5 h-5 text-inherit">
@@ -92,7 +92,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                     </li>
                 </ul>
             </div>
-        </aside>
+        </aside></>
     )
 }
 

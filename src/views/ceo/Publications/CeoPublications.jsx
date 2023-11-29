@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { rcCenterLists } from '@/services/RcCenterService';
 import { publicationsTypeLists } from '@/services/PublicationsType';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CeoPublications = (props) => {
 
@@ -52,6 +53,7 @@ const CeoPublications = (props) => {
         // publications list
         publicationsLists().then((response) => {
             setPublications(response.data.listOfData);
+            toast.success("Fetch performances successfully!!👍");
         }).catch(error => {
             console.log(error)
         })
@@ -68,11 +70,13 @@ const CeoPublications = (props) => {
         if (response?.data.status) {
             setIsDialogOpen(false)
             setPublications([...publications, response.data.data])
+            toast.success("Added performance successfully!!👍");
         }
     };
 
     return (
         <>
+        <Toaster/>
             <div className='main-container'>
                 <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                     <div className="items-start justify-between md:flex mt-12">

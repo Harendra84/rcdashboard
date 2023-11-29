@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -10,11 +11,13 @@ const Profile = () => {
     const storedUserData = localStorage.getItem('userInfo');
     if (storedUserData) {
       setUserData(JSON.parse(storedUserData));
+      toast.success("Fetch profile successfully!!👍");
     }
   }, []);
 
   return (
     <>
+      <Toaster />
       <div className='main-container'>
         <div className="grid w-full gap-4">
           <div className="grid grid-cols-1 gap-8 mx-auto">

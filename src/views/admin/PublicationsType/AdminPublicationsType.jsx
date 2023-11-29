@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { addPublicationsType, publicationsTypeLists, updatePublicationsType } from '@/services/PublicationsType';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AdminPublicationsType = (props) => {
 
@@ -17,38 +18,40 @@ const AdminPublicationsType = (props) => {
         "benchmarksNo": 0
     });
 
+     //publications types list
+     useEffect(() => {
+        publicationsTypeLists().then((response) => {
+            setPublicationsTypes(response.data.listOfData);
+            toast.success("Fetch parameters successfully!!👍");
+        }).catch(error => {
+            console.log(error)
+        })
+    }, [])
+
     const handleChange = (e) => {
         setPublicationsType({ ...publicationsType, [e.target.name]: e.target.value });
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         const response = await addPublicationsType(publicationsType).catch(console.log);
 
-        if (response?.data) {
+        if (response?.data.status) {
             setIsDialogOpen(false)
-            setPublicationsTypes([ ...publicationsTypes, response.data.data])
+            setPublicationsTypes([...publicationsTypes, response.data.data])
+            toast.success("Added parameters successfully!!👍");
         }
     };
-    
-    //publications types list
-    useEffect(() => {
-        publicationsTypeLists().then((response) => {
-            setPublicationsTypes(response.data.listOfData);
-        }).catch(error => {
-            console.log(error)
-        })
-    }, [])
 
     return (
         <>
+        <Toaster/>
             <div className='main-container'>
                 <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                     <div className="items-start justify-between md:flex mt-12">
                         <div className="max-w-lg">
                             <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
-                            Parameters Tables
+                                Parameters Tables
                             </h3>
                         </div>
                         <div className="mt-3 md:mt-0">

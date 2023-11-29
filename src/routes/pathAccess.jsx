@@ -17,7 +17,7 @@ export const AdminAccess = [
     iconName: <BsPersonAdd className='icon' />
   },
   {
-    name: "RCCenter",
+    name: "RC Center",
     link: "/admin-dashboard/rccenter",
     iconName: <PiChatCenteredText  className='icon' />
   },

@@ -83,8 +83,9 @@ const UpdateViewCoordinatorPublications = () => {
         publication.rcCenter.rcCenterId = rcCenterId;
         const response = await updateUser(publication).catch(console.log)
 
-        if (response?.data) {
+        if (response?.data.status) {
             console.log(response.data.data)
+            toast.success("Update performance successfully!!👍");
             navigate("/coordinator-dashboard/publications");
         }
     };

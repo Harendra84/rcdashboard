@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { rcCenterLists } from '@/services/RcCenterService';
 import { publicationsTypeLists } from '@/services/PublicationsType';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CoordinatorPublications = (props) => {
 
@@ -39,13 +40,12 @@ const CoordinatorPublications = (props) => {
         publication.publicationsType.publicationsTypeId = publicationsTypeId;
         publication.rcCenter.rcCenterId = rcCenterId;
 
-        const response = publication.publicationsId !== 0
-            ? await updatePublications(publication).catch(console.log)
-            : await addPublications(publication).catch(console.log);
+        const response = await addPublications(publication).catch(console.log);
 
-        if (response?.data) {
+        if (response?.data.status) {
             setIsDialogOpen(false)
             setPublications([...publications, response.data.data])
+            toast.success("Added performance successfully!!👍");
         }
     };
 
@@ -68,6 +68,7 @@ const CoordinatorPublications = (props) => {
         // publications list 
         publicationsLists().then((response) => {
             setPublications(response.data.listOfData);
+            toast.success("Fetch performances successfully!!👍");
         }).catch(error => {
             console.log(error)
         })
@@ -75,12 +76,13 @@ const CoordinatorPublications = (props) => {
 
     return (
         <>
+            <Toaster />
             <div className='main-container'>
                 <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                     <div className="items-start justify-between md:flex mt-12">
                         <div className="max-w-lg">
                             <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
-                            Parameters Table
+                                Parameters Table
                             </h3>
                         </div>
                         <div className="mt-3 md:mt-0">

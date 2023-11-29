@@ -26,26 +26,26 @@ const Login = () => {
     try {
       const res = await login(inputs.username, inputs.password);
       if (!res.data.status) {
-        toast.error("Wrong Credentials 😢");
+        toast.error("Wrong Credentials!!😢");
       }
       if (res.data.status) {
         localStorage.setItem("loginStatus", JSON.stringify(res.data.status));
         localStorage.setItem("userInfo", JSON.stringify(res.data.data));
         if (res.data.data.roleType === "ADMIN") {
-          toast.success("Admin login successfully!!");
+          toast.success("Admin login successfully!!😊");
           return navigate("/admin-dashboard");
         } else if (res.data.data.roleType === "CEO") {
-          toast.success("Ceo login successfully!!");
+          toast.success("Ceo login successfully!!😊");
           return navigate("/ceo-dashboard");
         } else if (res.data.data.roleType === "COORDINATOR") {
-          toast.success("Coordinator login successfully!!");
+          toast.success("Coordinator login successfully!!😊");
           return navigate("/manager-dashboard");
-        }else if (res.data.data.roleType === "MANAGER") {
-          toast.success("manager login successfully!!");
+        } else if (res.data.data.roleType === "MANAGER") {
+          toast.success("Manager login successfully!!😊");
           return navigate("/manager-dashboard");
-        } 
+        }
         else {
-          toast.error("Something went wrong!");
+          toast.error("Something went wrong!1😢");
           return navigate(0);
         }
       }
@@ -64,7 +64,7 @@ const Login = () => {
         <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
           <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
             <div className="mt-12 flex flex-col items-center">
-              <h1 className="text-2xl font-extrabold mb-5">Welcome, to Rc Dashboard</h1>
+              <h1 className="text-2xl font-extrabold mb-5">Welcome, to RC Dashboard</h1>
               <div className="w-full flex-1 mt-8">
                 <div className="mx-auto max-w-xs">
                   <label htmlFor="username" className="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Username</label>

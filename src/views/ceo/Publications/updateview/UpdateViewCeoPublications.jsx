@@ -84,6 +84,7 @@ const UpdateViewCeoPublications = () => {
         publication.rcCenter.rcCenterId = rcCenterId;
         const response = await updatePublications(publication).catch(console.log)
         if (response?.data.status) {
+            toast.success("Update performance successfully!!👍");
             navigate("/ceo-dashboard/publications");
         }
     };

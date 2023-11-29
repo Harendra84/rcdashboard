@@ -7,6 +7,7 @@ import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { createColumnHelper } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -19,6 +20,7 @@ export const CellComponent = ({ row }) => {
         deleteUser(row.original.userId).then((response) => {
             if (response.data.status) {
                 setIsDialogOpen(false)
+                toast.error("Deleted user successfully!!👍");
                 navigate('/admin-dashboard/user');
             }
         }).catch(error => {
@@ -27,6 +29,8 @@ export const CellComponent = ({ row }) => {
     };
 
     return (
+        <>
+        <Toaster/>
         <Dialog>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -80,6 +84,7 @@ export const CellComponent = ({ row }) => {
                 )}
             </DropdownMenu>
         </Dialog>
+        </>
     )
 }
 

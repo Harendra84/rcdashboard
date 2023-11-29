@@ -54,8 +54,9 @@ const UpdateViewAdminPublicationsType = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const response = await updatePublicationsType(publicationsTypeId).catch(console.log)
+        const response = await updatePublicationsType(publicationsType).catch(console.log)
         if (response?.data?.status) {
+            toast.success("Update parameters successfully!!👍");
             navigate("/admin-dashboard/publicationstype");
         }
     };

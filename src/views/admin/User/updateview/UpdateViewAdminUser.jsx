@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { rcCenterLists } from '@/services/RcCenterService';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function useQuery() {
     const { search } = useLocation();
@@ -18,9 +19,10 @@ function useQuery() {
 const UpdateViewAdminUser = () => {
 
     const [rcCenters, setRcCenters] = useState([]);
-    const [rcCenterId, setRcCenterId] = useState();
+    const [rcCenterId, setRcCenterId] = useState("");
     const [roleType, setRoleType] = useState("UNDEFINED");
-    const [status, setStatus] = useState(true);
+    const [campus, setCampus] = useState("");
+    const [status, setStatus] = useState();
     const [title, setTitle] = useState("Update User");
     const [isDisabled, setIsDisabled] = useState(false);
 
@@ -29,6 +31,7 @@ const UpdateViewAdminUser = () => {
     const navigate = useNavigate();
 
     const [user, setUser] = useState({
+        "active": "",
         "fullName": "",
         "username": "",
         "campus": "",
@@ -67,6 +70,7 @@ const UpdateViewAdminUser = () => {
             setUser(response.data.data);
             setStatus(String(response.data.data.active))
             setRoleType(response.data.data.roleType);
+            setCampus(response.data.data.campus);
             setRcCenterId(response.data.data.rcCenter.rcCenterId);
         }).catch(error => {
             console.log(error)
@@ -75,10 +79,15 @@ const UpdateViewAdminUser = () => {
     }, [query, params.userId])
 
     const onSubmit = async (e) => {
-        user.rcCenter.rcCenterId = rcCenterId;
         e.preventDefault();
+        user.rcCenter.rcCenterId = rcCenterId;
+        user.campus = campus;
+        user.roleType = roleType;
+        user.active = status;
+        
         const response = await updateUser(user).catch(console.log)
         if (response?.data?.status) {
+            toast.success("Update user successfully!!👍");
             navigate("/admin-dashboard/user");
         }
     };
@@ -103,7 +112,19 @@ const UpdateViewAdminUser = () => {
 
                                 <div className="grid grid-cols-8 items-center gap-4">
                                     <Label htmlFor="campus" className="text-right text-slate-300 font-bold">Campus</Label>
-                                    <Input value={user.campus} onChange={(e) => handleChange(e)} disabled={isDisabled} name="campus" id="campus" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Select value={campus} onValueChange={(value) => setCampus(value)} disabled={isDisabled} name="campus" id="campus" className="col-span-3 border-slate-300">
+                                        <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
+                                            <SelectValue placeholder="Select Campus" />
+                                        </SelectTrigger>
+                                        <SelectContent className="bg-gray-800 text-white" >
+                                            <SelectGroup>
+                                                <SelectLabel>Campus</SelectLabel>
+                                                <SelectItem value="PKD">PKD</SelectItem>
+                                                <SelectItem value="BBSR">BBSR</SelectItem>
+                                                <SelectItem value="VIZAG">VIZAG</SelectItem>
+                                            </SelectGroup>
+                                        </SelectContent>
+                                    </Select>
                                     <Label htmlFor="designation" className="text-right text-slate-300 font-bold">Designation</Label>
                                     <Input value={user.designation} onChange={(e) => handleChange(e)} disabled={isDisabled} name="designation" id="designation" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                 </div>
