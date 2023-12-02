@@ -12,12 +12,12 @@ const Login = () => {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setInputes((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,11 +96,15 @@ const Login = () => {
                       <circle cx="8.5" cy={7} r={4} />
                       <path d="M20 8v6M23 11h-6" />
                     </svg>
-                    <span className="ml-3">{loading ? (
-                      <AiOutlineLoading3Quarters className="flex items-center justify-center w-full animate-spin" />
-                    ) : (
-                      "Login In"
-                    )}</span>
+                    <span className="ml-3">
+                      {
+                        loading ? (
+                          <AiOutlineLoading3Quarters className="flex items-center justify-center w-full animate-spin" />
+                        ) : (
+                          "Login In"
+                        )
+                      }
+                    </span>
 
                   </button>
                   <div className="mt-5 text-gray-800 font-bold flex justify-center">

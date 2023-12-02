@@ -14,29 +14,29 @@ const Footer = () => {
             <a href="https://www.3ds.com/partners/partner-details/200000000287136_GRAMTARANG_TECHNOLOGIES_PRIVATE_LIMITED" target="_blank" rel="noreferrer" className="transition-colors hover:text-blue-500">
               GTTech
             </a>{" "}
-            IT Team{" "}
+            IT Team
           </p>
           <ul className="flex items-center gap-4">
             <li>
-              <a href="https://www.creative-tim.com" target="_blank" rel="noreferrer"
+              <a href="https://www.linkedin.com/school/centurion-university-of-technology-and-management/?originalSubdomain=in" target="_blank" rel="noreferrer"
                 className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500">
                 Contact Us
               </a>
             </li>
             <li>
-              <a href="https://www.creative-tim.com/presentation" target="_blank" rel="noreferrer"
+              <a href="https://cutm.ac.in/" target="_blank" rel="noreferrer"
                 className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500">
                 About Us
               </a>
             </li>
             <li>
-              <a href="https://www.creative-tim.com/blog" target="_blank" rel="noreferrer"
+              <a href="https://cutm.ac.in/" target="_blank" rel="noreferrer"
                 className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500">
                 Blog's
               </a>
             </li>
             <li>
-              <a href="https://www.creative-tim.com/license" target="_blank" rel="noreferrer"
+              <a href="https://cutm.ac.in/" target="_blank" rel="noreferrer"
                 className="block antialiased font-sans text-sm leading-normal py-0.5 px-1 font-normal text-inherit transition-colors hover:text-blue-500">
                 License
               </a>

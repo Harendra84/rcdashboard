@@ -3,7 +3,7 @@ import { publicationsTypeLists } from '@/services/PublicationsType';
 import { rcCenterLists } from '@/services/RcCenterService';
 import { userLists } from '@/services/UserService';
 import { useEffect, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { FcSalesPerformance } from "react-icons/fc";
 import { RiNumbersLine } from "react-icons/ri";
 
@@ -16,28 +16,24 @@ function CoordinatorDashboard(props) {
 
   useEffect(() => {
 
-    // user count
     userLists().then((response) => {
       setUser(response.data.listOfData);
     }).catch(error => {
       console.log(error)
     })
 
-    // rc center count
     rcCenterLists().then((response) => {
       setRcCenter(response.data.listOfData);
     }).catch(error => {
       console.log(error)
     })
 
-    // publications type count
     publicationsTypeLists().then((response) => {
       setPublicationsType(response.data.listOfData);
     }).catch(error => {
       console.log(error);
     })
 
-    // publications count
     publicationsLists().then((response) => {
       setPublications(response.data.listOfData);
     }).catch(error => {

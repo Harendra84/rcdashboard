@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaUserCircle } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
 

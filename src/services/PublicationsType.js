@@ -5,12 +5,12 @@ export const publicationsTypeLists = async () => {
     return axiosInstance.post(`${HOST_API_KEY}${PUBLICATIONS_TYPE_URL}/lists`)
 }
 
-export const addPublicationsType = async (PublicationsType) => {
-    return axiosInstance.post(`${HOST_API_KEY}${PUBLICATIONS_TYPE_URL}/add`, PublicationsType)
+export const addPublicationsType = async (publicationsType) => {
+    return axiosInstance.post(`${HOST_API_KEY}${PUBLICATIONS_TYPE_URL}/add`, publicationsType)
 }
 
-export const updatePublicationsType = async (PublicationsType) => {
-    return axiosInstance.post(`${HOST_API_KEY}${PUBLICATIONS_TYPE_URL}/update`, PublicationsType)
+export const updatePublicationsType = async (publicationsType) => {
+    return axiosInstance.post(`${HOST_API_KEY}${PUBLICATIONS_TYPE_URL}/update`, publicationsType)
 }
 
 export const deletePublicationsType = async (publicationsTypeId) => {

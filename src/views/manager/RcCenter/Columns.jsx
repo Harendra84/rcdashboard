@@ -1,40 +1,33 @@
 import { Button } from "@/components/ui/button";
-import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
-import { deleteUser } from "@/services/UserService";
-import { Dialog } from "@radix-ui/react-dialog";
+import { deleteRcCenter } from "@/services/RcCenterService";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { createColumnHelper } from "@tanstack/react-table"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-
-const showPublicationColor = ({ row }) => {
-    let colorClass = "text-gray-800 font-semibold bg-[#c8e6c9] px-4 py-2 rounded-full ";
-    return <span className={colorClass}>{row.original.roleType}</span>;
-}
 
 export const CellComponent = ({ row }) => {
     let navigate = useNavigate();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const handleDelete = () => {
-        deleteUser(row.original.userId).then((response) => {
+        deleteRcCenter(row.original.rcCenterId).then((response) => {
             if (response.data.status) {
                 setIsDialogOpen(false)
-                toast.error("Deleted user successfully!!👍");
-                navigate('/admin-dashboard/user');
+                 toast.error("Deleted RC Center successfully!!👍");
+                navigate('/admin-dashboard/rcCenter');
             }
         }).catch(error => {
             console.log(error)
         })
     };
-
     return (
         <>
-            <Toaster />
+         <Toaster/>
             <Dialog>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -45,7 +38,7 @@ export const CellComponent = ({ row }) => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="bg-gray-800">
                         <DropdownMenuLabel className="text-white">Actions</DropdownMenuLabel>
-                        <Link to={`/admin-dashboard/user/manage/${row.original.userId}`}>
+                        <Link to={`/manager-dashboard/rcCenter/`}>
                             <DropdownMenuItem>
                                 <Button variant="ghost" className="h-8 w-full bg-blue-500 text-white hover:bg-white-600 border border-gray-500">
                                     View
@@ -53,7 +46,7 @@ export const CellComponent = ({ row }) => {
                             </DropdownMenuItem>
                         </Link>
                         <DropdownMenuSeparator />
-                        <Link to={`/admin-dashboard/user/manage/${row.original.userId}/?updatecall=true`} state={{ 'updatecall': true }}>
+                        <Link to={`/manager-dashboard/rcCenter/`} state={{ 'updatecall': false }}>
                             <DropdownMenuItem>
                                 <Button variant="ghost" className="h-8 w-full bg-green-800 text-white border hover:bg-white-600 border-gray-500">
                                     Edit
@@ -63,7 +56,7 @@ export const CellComponent = ({ row }) => {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
                             <DialogTrigger asChild>
-                                <Button variant="ghost" className="h-8 w-full bg-red-800 text-white border hover:bg-white-600 border-gray-500" onClick={() => setIsDialogOpen(true)}>
+                                <Button variant="ghost" className="h-8 w-full bg-red-800 text-white border hover:bg-white-600 border-gray-500" onClick={() => setIsDialogOpen(false)}>
                                     Remove
                                 </Button>
                             </DialogTrigger>
@@ -76,7 +69,7 @@ export const CellComponent = ({ row }) => {
                                 <DropdownMenuSeparator />
                                 <DialogTitle className="text-gray-800 text-xl font-bold">Are you sure?</DialogTitle>
                                 <DialogDescription className="text-gray-800">
-                                    This action will delete this trainer permanentely.
+                                    This action will delete this rc center permanentely.
                                 </DialogDescription>
                             </DialogHeader>
                             <DropdownMenuSeparator className="text-gray-800" />
@@ -101,56 +94,16 @@ export const columns = [
         header: "S.No",
     }),
     {
-        accessorKey: "fullName",
-        header: "Full Name",
+        accessorKey: "rcCenterName",
+        header: "Rc Center Name",
     },
     {
-        accessorKey: "campus",
-        header: "Campus",
+        accessorKey: "totalMembers",
+        header: "Total Members",
     },
     {
-        accessorKey: "designation",
-        header: "Designation",
-    },
-    {
-        accessorKey: "department",
-        header: "Department",
-    },
-    {
-        accessorKey: "emailId",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Email Id
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-    },
-    {
-        accessorKey: "mobileNo",
-        header: "Mobile No",
-    },
-    {
-        accessorKey: "roleType",
-        header: "Role Type",
-        enableHiding: false,
-        cell: showPublicationColor,
-    },
-    {
-        accessorKey: "active",
-        header: "Status",
-    },
-    {
-        header: "RcCenter",
-        accessorFn: row => row.rcCenter.rcCenterName,
-    },
-    {
-        header: "Actons",
-        id: "actions",
+        header: "Actions",
+        id: "actons",
         enableHiding: false,
         cell: CellComponent,
     },

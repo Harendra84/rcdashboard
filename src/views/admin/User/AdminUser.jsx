@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
-import { columns } from './Columns';
-import { addUser, updateUser, userLists } from '@/services/UserService';
 import DataTable from './DataTable';
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { columns } from './Columns';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { addUser, userLists } from '@/services/UserService';
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { rcCenterLists } from '@/services/RcCenterService';
 import toast, { Toaster } from 'react-hot-toast';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const AdminUser = (props) => {
 
@@ -33,22 +34,20 @@ const AdminUser = (props) => {
             "rcCenterId": 0
         }
     });
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
-    // add user
     const onSubmit = async (e) => {
         e.preventDefault();
-        user.rcCenter.rcCenterId = parseInt(rcCenterId);
+        user.rcCenter.rcCenterId = rcCenterId;
         user.roleType = roleType;
         user.campus = campus;
-
         let isStatus = active === "true" ? true : false;
         const updatedUser = { ...user, 'active': isStatus }
         const response = addUser(updatedUser).catch(console.log);
-
         if (response?.data?.status) {
             setIsDialogOpen(false)
             setUsers([...users, response.data.data])
@@ -58,17 +57,18 @@ const AdminUser = (props) => {
 
     useEffect(() => {
 
-        // rc center list 
         rcCenterLists().then((response) => {
             setRcCenters(response.data.listOfData);
         }).catch(error => {
             console.log(error)
         })
 
-        //user list 
         userLists().then((response) => {
+            console.log(response.data.listOfData);
+            setLoading(true);
             setUsers(response.data.listOfData);
             toast.success("Fetch users successfully!!👍");
+            setLoading(false);
         }).catch(error => {
             console.log(error)
         })
@@ -89,7 +89,7 @@ const AdminUser = (props) => {
 
     return (
         <>
-        <Toaster/>
+            <Toaster />
             <div className='main-container'>
                 <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                     <div className="items-start justify-between md:flex mt-12">
@@ -98,29 +98,28 @@ const AdminUser = (props) => {
                                 User Table
                             </h3>
                         </div>
-                        {/* Add user */}
                         <div className="mt-3 md:mt-0 flex gap-4">
                             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                                 <DialogTrigger asChild>
                                     <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-800 md:text-sm">Add User</Button>
                                 </DialogTrigger>
-                                <DialogContent className="sm:max-w-2xl" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
+                                <DialogContent className="sm:max-w-3xl" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
                                     <form onSubmit={(e) => onSubmit(e)}>
                                         <DialogHeader>
-                                            <DialogTitle className="text-white">New User </DialogTitle>
+                                            <DialogTitle className="text-white">Add User</DialogTitle>
                                         </DialogHeader>
                                         <div className="grid gap-4 py-4">
 
                                             <div className="grid grid-cols-8 items-center gap-4">
                                                 <Label htmlFor="fullName" className="text-right text-slate-300 font-bold">Full Name</Label>
-                                                <Input onChange={(e) => handleChange(e)} name="fullName" type="text" id="fullname" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                <Input onChange={(e) => handleChange(e)} name="fullName" type="text" id="fullname" placeholder="Enter Full Name" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                 <Label htmlFor="username" className="text-right text-slate-300 font-bold">Username</Label>
-                                                <Input onChange={(e) => handleChange(e)} type="text" name="username" id="username" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                <Input onChange={(e) => handleChange(e)} type="text" name="username" id="username" placeholder="Enter Username" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                             </div>
 
                                             <div className="grid grid-cols-8 items-center gap-4">
                                                 <Label htmlFor="campus" className="text-right text-slate-300 font-bold">Campus</Label>
-                                                <Select onValueChange={(value) => setCampus(value)} type="text" name="campus" id="campus" className="col-span-3 border-slate-300">
+                                                <Select onValueChange={(value) => setCampus(value)} type="text" name="campus" id="campus" required className="col-span-3 border-slate-300">
                                                     <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
                                                         <SelectValue placeholder="Select Campus" />
                                                     </SelectTrigger>
@@ -134,22 +133,22 @@ const AdminUser = (props) => {
                                                     </SelectContent>
                                                 </Select>
                                                 <Label htmlFor="designation" className="text-right text-slate-300 font-bold">Designation</Label>
-                                                <Input onChange={(e) => handleChange(e)} type="text" name="designation" id="designation" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                <Input onChange={(e) => handleChange(e)} type="text" name="designation" id="designation" placeholder="Enter Designation" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                             </div>
 
                                             <div className="grid grid-cols-8 items-center gap-4">
                                                 <Label htmlFor="department" className="text-right text-slate-300 font-bold">Department</Label>
-                                                <Input onChange={(e) => handleChange(e)} type="text" name="department" id="department" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                <Input onChange={(e) => handleChange(e)} type="text" name="department" id="department" placeholder="Enter Department" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                 <Label htmlFor="emailId" className="text-right text-slate-300 font-bold">Email Id</Label>
-                                                <Input onChange={(e) => handleChange(e)} type="email" name="emailId" id="emailId" className="col-span-3 border-slate-300 focus:outline-none outline-none bg-gray-800 text-white" />
+                                                <Input onChange={(e) => handleChange(e)} type="email" name="emailId" id="emailId" placeholder="Enter Email Id" required className="col-span-3 border-slate-300 focus:outline-none outline-none bg-gray-800 text-white" />
                                             </div>
 
                                             <div className="grid grid-cols-8 items-center gap-4">
                                                 <Label htmlFor="mobileNo" className="text-right text-slate-300 font-bold">Phone No</Label>
-                                                <Input onChange={(e) => handleChange(e)} type="number" name="mobileNo" id="mobileNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                <Input onChange={(e) => handleChange(e)} type="number" name="mobileNo" id="mobileNo" placeholder="Enter Mobile No." required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
 
                                                 <Label htmlFor="roleType" className="text-right text-slate-300 font-bold">Role Type</Label>
-                                                <Select onValueChange={(value) => setRoleType(value)} type="text" name="roleType" id="roleType" className="col-span-3 border-slate-300">
+                                                <Select onValueChange={(value) => setRoleType(value)} type="text" name="roleType" id="roleType" required className="col-span-3 border-slate-300">
                                                     <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
                                                         <SelectValue placeholder="Select Role Type" />
                                                     </SelectTrigger>
@@ -166,9 +165,9 @@ const AdminUser = (props) => {
 
                                             <div className="grid grid-cols-8 items-center gap-4">
                                                 <Label htmlFor="status" className="text-right text-slate-300 font-bold">Status</Label>
-                                                <Select onValueChange={(value) => setActive(value)} type="text" name="active" id="active" className="col-span-3 border-slate-300 ">
+                                                <Select onValueChange={(value) => setActive(value)} type="text" name="active" id="active" required className="col-span-3 border-slate-300 ">
                                                     <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800">
-                                                        <SelectValue placeholder="Select a status" />
+                                                        <SelectValue placeholder="Select Status" />
                                                     </SelectTrigger>
                                                     <SelectContent className="bg-gray-800 text-white">
                                                         <SelectGroup>
@@ -180,7 +179,7 @@ const AdminUser = (props) => {
                                                 </Select>
 
                                                 <Label htmlFor="rcCenterName" className="text-right text-slate-300 font-bold">Rc Center</Label>
-                                                <Select onValueChange={(value) => setRcCenterId(value)} type="text" name="rcCenterName" id="rcCenterName" className="col-span-3 border-slate-300 ">
+                                                <Select onValueChange={(value) => setRcCenterId(value)} type="text" name="rcCenterName" id="rcCenterName" required className="col-span-3 border-slate-300 ">
                                                     <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
                                                         <SelectValue placeholder="Select Rc Center" />
                                                     </SelectTrigger>
@@ -208,7 +207,13 @@ const AdminUser = (props) => {
                         </div>
                     </div>
                     <div className="mt-12 shadow-sm rounded-lg overflow-x-auto">
-                        <DataTable columns={columns} data={filterData} />
+                        {
+                            loading ? (
+                                <AiOutlineLoading3Quarters className="flex items-center justify-center w-full animate-spin text-lg" />
+                            ) : (
+                                <DataTable columns={columns} data={filterData} />
+                            )
+                        }
                     </div>
                 </div>
             </div>

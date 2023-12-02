@@ -6,6 +6,7 @@ import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { createColumnHelper } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -29,8 +30,9 @@ export const CellComponent = ({ row }) => {
 
     const handleDelete = () => {
         deletePublications(row.original.publicationsId).then((response) => {
-            console.log(response.data)
             if (response.data.status) {
+                setIsDialogOpen(false)
+                toast.error("Deleted performance successfully!!👍");
                 navigate('/coordinator-dashboard/publications');
             }
         }).catch(error => {
@@ -39,17 +41,18 @@ export const CellComponent = ({ row }) => {
     };
     return (
         <>
+        <Toaster/>
             <Dialog>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-10 bg-gray-800 text-white border border-gray-500">
-                            <span className="sr-only">Open menu</span>
+                            <span className="sr-only">Open Menu</span>
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="bg-gray-800">
                         <DropdownMenuLabel className="text-white">Actions</DropdownMenuLabel>
-                        <Link to={`/coordinator-dashboard/publications/manage/${row.original.publicationsId}`}>
+                        <Link to={`/manager-dashboard/publications/`}>
                             <DropdownMenuItem>
                                 <Button variant="ghost" className="h-8 w-full bg-blue-500 text-white hover:bg-white-600 border border-gray-500">
                                     View
@@ -57,7 +60,7 @@ export const CellComponent = ({ row }) => {
                             </DropdownMenuItem>
                         </Link>
                         <DropdownMenuSeparator />
-                        <Link to={`/coordinator-dashboard/publications/manage/${row.original.publicationsId}/?updatecall=true`} state={{ 'updatecall': true }}>
+                        <Link to={`/manager-dashboard/publications/`} state={{ 'updatecall': true }}>
                             <DropdownMenuItem>
                                 <Button variant="ghost" className="h-8 w-full bg-green-800 text-white border hover:bg-white-600 border-gray-500">
                                     Edit
@@ -67,14 +70,14 @@ export const CellComponent = ({ row }) => {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
                             <DialogTrigger asChild>
-                                <Button variant="ghost" className="h-8 w-full bg-red-800 text-white border hover:bg-white-600 border-gray-500" onClick={() => setIsDialogOpen(true)}>
+                                <Button variant="ghost" className="h-8 w-full bg-red-800 text-white border hover:bg-white-600 border-gray-500" onClick={() => setIsDialogOpen(false)}>
                                     Remove
                                 </Button>
                             </DialogTrigger>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                     {isDialogOpen && (
-                        <DialogContent className="sm:max-w-[425px] bg-white">
+                        <DialogContent className="sm:max-w-[425px] bg-slate-400">
                             <DialogHeader>
                                 <DialogTitle className="text-red-600 text-xl font-bold">Confirm!</DialogTitle>
                                 <DropdownMenuSeparator />
@@ -121,8 +124,8 @@ export const columns = [
         accessorFn: row => row.rcCenter.totalMembers,
     },
     {
-        header: "Parameters Value",
-        id: "parameter value",
+        header: "Performance Value",
+        id: "performance value",
         enableHiding: false,
         cell: showPublicationColor,
     },

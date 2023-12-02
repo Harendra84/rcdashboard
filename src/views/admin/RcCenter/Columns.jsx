@@ -6,6 +6,7 @@ import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { createColumnHelper } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -17,6 +18,7 @@ export const CellComponent = ({ row }) => {
         deleteRcCenter(row.original.rcCenterId).then((response) => {
             if (response.data.status) {
                 setIsDialogOpen(false)
+                 toast.error("Deleted RC Center successfully!!👍");
                 navigate('/admin-dashboard/rcCenter');
             }
         }).catch(error => {
@@ -25,11 +27,12 @@ export const CellComponent = ({ row }) => {
     };
     return (
         <>
+         <Toaster/>
             <Dialog>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-10 bg-gray-800 text-white border border-gray-500">
-                            <span className="sr-only">Open menu</span>
+                            <span className="sr-only">Open Menu</span>
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
@@ -61,7 +64,7 @@ export const CellComponent = ({ row }) => {
                     </DropdownMenuContent>
                     {isDialogOpen && (
                         //<Dialog>
-                        <DialogContent className="sm:max-w-[425px] bg-white">
+                        <DialogContent className="sm:max-w-[425px] bg-slate-400">
                             <DialogHeader>
                                 <DialogTitle className="text-red-600 text-xl font-bold">Confirm!</DialogTitle>
                                 <DropdownMenuSeparator />

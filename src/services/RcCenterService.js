@@ -5,12 +5,12 @@ export const rcCenterLists = async () => {
     return axiosInstance.post(`${HOST_API_KEY}${RC_CENTER_URL}/lists`)
 }
 
-export const addRcCenter = async (RcCenter) => {
-    return axiosInstance.post(`${HOST_API_KEY}${RC_CENTER_URL}/add`, RcCenter)
+export const addRcCenter = async (rcCenter) => {
+    return axiosInstance.post(`${HOST_API_KEY}${RC_CENTER_URL}/add`, rcCenter)
 }
 
-export const updateRcCenter = async (RcCenter) => {
-    return axiosInstance.post(`${HOST_API_KEY}${RC_CENTER_URL}/update`, RcCenter)
+export const updateRcCenter = async (rcCenter) => {
+    return axiosInstance.post(`${HOST_API_KEY}${RC_CENTER_URL}/update`, rcCenter)
 }
 
 export const deleteRcCenter = async (rcCenterId) => {

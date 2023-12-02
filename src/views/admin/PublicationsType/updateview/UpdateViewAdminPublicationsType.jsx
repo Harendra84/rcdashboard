@@ -1,22 +1,20 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getByPublicationsTypeId, updatePublicationsType } from '@/services/PublicationsType';
+import toast, { Toaster } from 'react-hot-toast';
 
 function useQuery() {
     const { search } = useLocation();
-
     return useMemo(() => new URLSearchParams(search), [search]);
 }
 
 const UpdateViewAdminPublicationsType = () => {
 
-    const [title, setTitle] = useState("Update Publications Type");
+    const [title, setTitle] = useState("Update Parameter");
     const [isDisabled, setIsDisabled] = useState(false);
 
     const query = useQuery();
@@ -37,14 +35,13 @@ const UpdateViewAdminPublicationsType = () => {
 
         if (!query.get('updatecall')) {
             setIsDisabled(true)
-            setTitle("View Details of Publications Type")
+            setTitle("View Parameter")
         }
 
         getByPublicationsTypeId(params.publicationsTypeId).then((response) => {
             if (!response.data.data) {
                 return navigate("/admin-dashboard/publicationstype");
             }
-            console.log(response.data.data);
             setPublicationsType(response.data.data);
         }).catch(error => {
             console.log(error)
@@ -63,8 +60,9 @@ const UpdateViewAdminPublicationsType = () => {
 
     return (
         <>
+        <Toaster/>
             <div className="main-container">
-                <Card className="w-[1100px] mx-auto my-20 bg-[#1d2634] text-white">
+                <Card className="w-[600px] mx-auto my-20 bg-[#1d2634] text-white">
                     <form onSubmit={(e) => onSubmit(e)}>
                         <CardHeader>
                             <CardTitle>{title}</CardTitle>
@@ -73,10 +71,9 @@ const UpdateViewAdminPublicationsType = () => {
                             <div className="grid w-full items-center gap-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Parameter Name</Label>
-                                    <Input value={publicationsType.publicationsName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" id="publicationsName" name="publicationsName" placeholder="Enter Parameter Name" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
-                                    
+                                    <Input value={publicationsType.publicationsName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" id="publicationsName" name="publicationsName" placeholder="Enter Parameter Name" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                     <Label htmlFor="benchmarksNo" className="text-right text-slate-300 font-bold">Benchmark No</Label>
-                                    <Input value={publicationsType.benchmarksNo} onChange={(e) => handleChange(e)} disabled={isDisabled} type="any" name="benchmarksNo" id="benchmarksNo" placeholder="Enter Benchmark No" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Input value={publicationsType.benchmarksNo} onChange={(e) => handleChange(e)} disabled={isDisabled} type="any" name="benchmarksNo" id="benchmarksNo" placeholder="Enter Benchmark No." required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                 </div>
                             </div>
                         </CardContent>

@@ -1,10 +1,9 @@
 import { useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import PropTypes from 'prop-types';
 import {
     flexRender,
-    getSortedRowModel,
+    // ColumnFiltersState,
     getCoreRowModel,
     getPaginationRowModel,
     getFilteredRowModel,
@@ -55,6 +54,7 @@ export default function DataTable({ columns, data }) {
     const table = useReactTable({
         data,
         columns,
+        onSortingChange: setSorting,
         pageCount: Math.ceil(data.length / pageSize),
         state: {
             sorting,
@@ -62,13 +62,12 @@ export default function DataTable({ columns, data }) {
             globalFilter,
             pagination,
         },
-        onSortingChange: setSorting,
-        getSortedRowModel: getSortedRowModel(),
         getCoreRowModel: getCoreRowModel(),
         onPaginationChange: setPagination,
         getPaginationRowModel: getPaginationRowModel(),
         onColumnFiltersChange: setColumnFilters,
         getFilteredRowModel: getFilteredRowModel(),
+        // manualPagination: true,
         debugTable: true,
     })
 

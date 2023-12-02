@@ -73,6 +73,11 @@ export const ManagerAccess = [
     iconName: <MdDashboard  className='icon' />
   },
   {
+    name: "RC Center",
+    link: "/manager-dashboard/rccenter",
+    iconName: <PiChatCenteredText  className='icon' />
+  },
+  {
     name: "Parameter",
     link: "/manager-dashboard/publicationstype",
     iconName: <RiNumbersLine className='icon' />

@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button"
 import PropTypes from 'prop-types';
 import {
   flexRender,
-  // ColumnFiltersState,
   getCoreRowModel,
   getPaginationRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -30,18 +30,16 @@ import {
 import Debounced from "@/utils/Debounced";
 
 export default function DataTable({ columns, data }) {
-  const [columnFilters, setColumnFilters] = useState(
-    []
-  )
+  const [columnFilters, setColumnFilters] = useState([]);
 
   const [globalFilter, setGlobalFilter] = useState("");
+  const [sorting, setSorting] = useState([])
 
   const [{ pageIndex, pageSize }, setPagination] =
     useState({
       pageIndex: 0,
       pageSize: 5,
     })
-  const [sorting, setSorting] = useState([])
 
   const pagination = useMemo(
     () => ({
@@ -55,6 +53,7 @@ export default function DataTable({ columns, data }) {
     data,
     columns,
     onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     pageCount: Math.ceil(data.length / pageSize),
     state: {
       sorting,
@@ -67,7 +66,6 @@ export default function DataTable({ columns, data }) {
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-    // manualPagination: true,
     debugTable: true,
   })
 
@@ -174,7 +172,7 @@ export default function DataTable({ columns, data }) {
               <SelectGroup>
                 <SelectLabel>Show Page</SelectLabel>
                 {[5, 10, 20, 30, 40, 50].map((pageSize) => (
-                  <SelectItem value={pageSize} key={pageSize}>Show{pageSize}</SelectItem>
+                  <SelectItem value={pageSize} key={pageSize}>Show {pageSize}</SelectItem>
                 ))}
               </SelectGroup>
             </SelectContent>

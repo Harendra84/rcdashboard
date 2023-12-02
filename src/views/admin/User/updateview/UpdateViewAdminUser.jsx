@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { addUser, getUserById, updateUser, userLists } from '@/services/UserService';
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { getUserById, updateUser } from '@/services/UserService';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -12,7 +11,6 @@ import toast from 'react-hot-toast';
 
 function useQuery() {
     const { search } = useLocation();
-
     return useMemo(() => new URLSearchParams(search), [search]);
 }
 
@@ -52,17 +50,14 @@ const UpdateViewAdminUser = () => {
 
         if (!query.get('updatecall')) {
             setIsDisabled(true)
-            setTitle("View Details of User")
+            setTitle("View User")
         }
 
-        //rc center list 
         rcCenterLists().then((response) => {
             setRcCenters(response.data.listOfData);
         }).catch(error => {
             console.log(error)
         })
-
-        //get user by id 
         getUserById(params.userId).then((response) => {
             if (!response.data.data) {
                 return navigate("/admin-dashboard/user");
@@ -84,7 +79,6 @@ const UpdateViewAdminUser = () => {
         user.campus = campus;
         user.roleType = roleType;
         user.active = status;
-        
         const response = await updateUser(user).catch(console.log)
         if (response?.data?.status) {
             toast.success("Update user successfully!!👍");
@@ -95,7 +89,7 @@ const UpdateViewAdminUser = () => {
     return (
         <>
             <div className="main-container">
-                <Card className="w-[1100px] mx-auto my-20 bg-[#1d2634] text-white">
+                <Card className="w-[800px] mx-auto my-20 bg-[#1d2634] text-white">
                     <form onSubmit={(e) => onSubmit(e)}>
                         <CardHeader>
                             <CardTitle>{title}</CardTitle>
@@ -105,14 +99,14 @@ const UpdateViewAdminUser = () => {
 
                                 <div className="grid grid-cols-8 items-center gap-4">
                                     <Label htmlFor="fullname" className="text-right text-slate-300 font-bold">Full Name</Label>
-                                    <Input value={user.fullName} onChange={(e) => handleChange(e)} disabled={isDisabled} name="fullName" id="fullname" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Input value={user.fullName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" name="fullName" id="fullname" placeholder="Enter Full Name" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                     <Label htmlFor="username" className="text-right text-slate-300 font-bold">Username</Label>
-                                    <Input value={user.username} onChange={(e) => handleChange(e)} disabled={isDisabled} name="username" id="username" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Input value={user.username} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" name="username" id="username" placeholder="Enter Username" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                 </div>
 
                                 <div className="grid grid-cols-8 items-center gap-4">
                                     <Label htmlFor="campus" className="text-right text-slate-300 font-bold">Campus</Label>
-                                    <Select value={campus} onValueChange={(value) => setCampus(value)} disabled={isDisabled} name="campus" id="campus" className="col-span-3 border-slate-300">
+                                    <Select value={campus} onValueChange={(value) => setCampus(value)} disabled={isDisabled} type="text" name="campus" id="campus" placeholder="Enter Campus" required className="col-span-3 border-slate-300">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
                                             <SelectValue placeholder="Select Campus" />
                                         </SelectTrigger>
@@ -126,22 +120,22 @@ const UpdateViewAdminUser = () => {
                                         </SelectContent>
                                     </Select>
                                     <Label htmlFor="designation" className="text-right text-slate-300 font-bold">Designation</Label>
-                                    <Input value={user.designation} onChange={(e) => handleChange(e)} disabled={isDisabled} name="designation" id="designation" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Input value={user.designation} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" name="designation" id="designation" placeholder="Enter Designation" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                 </div>
 
                                 <div className="grid grid-cols-8 items-center gap-4">
                                     <Label htmlFor="department" className="text-right text-slate-300 font-bold">Department</Label>
-                                    <Input value={user.department} onChange={(e) => handleChange(e)} disabled={isDisabled} name="department" id="department" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Input value={user.department} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" name="department" id="department" placeholder="Enter Department" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                     <Label htmlFor="emailId" className="text-right text-slate-300 font-bold">Email Id</Label>
-                                    <Input value={user.emailId} onChange={(e) => handleChange(e)} disabled={isDisabled} name="emailId" id="emailId" className="col-span-3 border-slate-300 focus:outline-none outline-none bg-gray-800 text-white" />
+                                    <Input value={user.emailId} onChange={(e) => handleChange(e)} disabled={isDisabled} type="email" name="emailId" id="emailId" placeholder="Enter Email Id" required className="col-span-3 border-slate-300 focus:outline-none outline-none bg-gray-800 text-white" />
                                 </div>
 
                                 <div className="grid grid-cols-8 items-center gap-4">
-                                    <Label htmlFor="mobileNo" className="text-right text-slate-300 font-bold">Phone</Label>
-                                    <Input value={user.mobileNo} onChange={(e) => handleChange(e)} disabled={isDisabled} name="mobileNo" id="mobileNo" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Label htmlFor="mobileNo" className="text-right text-slate-300 font-bold">Mobile No</Label>
+                                    <Input value={user.mobileNo} onChange={(e) => handleChange(e)} disabled={isDisabled} type="number" name="mobileNo" id="mobileNo" placeholder="Enter Mobile No" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
 
                                     <Label htmlFor="roleType" className="text-right text-slate-300 font-bold">Role Type</Label>
-                                    <Select value={roleType} onValueChange={(value) => setRoleType(value)} disabled={isDisabled} name="roleType" id="roleType" className="col-span-3 border-slate-300">
+                                    <Select value={roleType} onValueChange={(value) => setRoleType(value)} disabled={isDisabled} type="text" name="roleType" id="roleType" required className="col-span-3 border-slate-300">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
                                             <SelectValue placeholder="Select a role" />
                                         </SelectTrigger>
@@ -156,8 +150,8 @@ const UpdateViewAdminUser = () => {
                                     </Select>
                                 </div>
                                 <div className="grid grid-cols-8 items-center gap-4">
-                                    <Label htmlFor="status" className="text-right text-slate-300 font-bold">Status</Label>
-                                    <Select value={status} onValueChange={(value) => setStatus(value)} disabled={isDisabled} name="active" id="active" className="col-span-3 border-slate-300 ">
+                                    <Label htmlFor="active" className="text-right text-slate-300 font-bold">Status</Label>
+                                    <Select value={status} onValueChange={(value) => setStatus(value)} disabled={isDisabled} type="text" name="active" id="active" required className="col-span-3 border-slate-300 ">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800">
                                             <SelectValue placeholder="Select a status" />
                                         </SelectTrigger>
@@ -171,7 +165,7 @@ const UpdateViewAdminUser = () => {
                                     </Select>
 
                                     <Label htmlFor="rcCenterName" className="text-right text-slate-300 font-bold">Rc Center</Label>
-                                    <Select value={rcCenterId} onValueChange={(value) => setRcCenterId(value)} disabled={isDisabled} name="rcCenterName" id="rcCenterName" className="col-span-3 border-slate-300 ">
+                                    <Select value={rcCenterId} onValueChange={(value) => setRcCenterId(value)} disabled={isDisabled} type="text" name="rcCenterName" id="rcCenterName" placeholder="Enter RC Center" required className="col-span-3 border-slate-300 ">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
                                             <SelectValue placeholder="Select Rc Center" />
                                         </SelectTrigger>

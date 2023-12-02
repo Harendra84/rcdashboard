@@ -1,19 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
-import { addUser, getUserById, updateUser, userLists } from '@/services/UserService';
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import { rcCenterLists } from '@/services/RcCenterService';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { getByPublicationsId, publicationsLists, updatePublications } from '@/services/PublicationsService';
+import { getByPublicationsId, updatePublications } from '@/services/PublicationsService';
 import { publicationsTypeLists } from '@/services/PublicationsType';
+import toast, { Toaster } from 'react-hot-toast';
 
 function useQuery() {
     const { search } = useLocation();
-
     return useMemo(() => new URLSearchParams(search), [search]);
 }
 
@@ -23,8 +21,9 @@ const UpdateViewCeoPublications = () => {
     const [publicationsTypeId, setPublicationsTypeId] = useState();
     const [rcCenters, setRcCenters] = useState([]);
     const [rcCenterId, setRcCenterId] = useState();
-    const [title, setTitle] = useState("Update Parameters");
+    const [title, setTitle] = useState("Update Performance");
     const [isDisabled, setIsDisabled] = useState(false);
+
     const query = useQuery();
     const params = useParams();
     const navigate = useNavigate();
@@ -48,17 +47,15 @@ const UpdateViewCeoPublications = () => {
 
         if (!query.get('updatecall')) {
             setIsDisabled(true)
-            setTitle("View Details of Parameters")
+            setTitle("View Performance")
         }
 
-        //publications type list 
         publicationsTypeLists().then((response) => {
             setPublicationsTypes(response.data.listOfData);
         }).catch(error => {
             console.log(error)
         })
 
-        //rc center list 
         rcCenterLists().then((response) => {
             setRcCenters(response.data.listOfData);
         }).catch(error => {
@@ -83,7 +80,7 @@ const UpdateViewCeoPublications = () => {
         publication.publicationsType.publicationsTypeId = publicationsTypeId;
         publication.rcCenter.rcCenterId = rcCenterId;
         const response = await updatePublications(publication).catch(console.log)
-        if (response?.data.status) {
+        if (response?.data?.status) {
             toast.success("Update performance successfully!!👍");
             navigate("/ceo-dashboard/publications");
         }
@@ -91,8 +88,9 @@ const UpdateViewCeoPublications = () => {
 
     return (
         <>
+        <Toaster/>
             <div className="main-container">
-                <Card className="w-[1100px] mx-auto my-20 bg-[#1d2634] text-white">
+                <Card className="w-[600px] mx-auto my-20 bg-[#1d2634] text-white">
                     <form onSubmit={(e) => onSubmit(e)}>
                         <CardHeader>
                             <CardTitle>{title}</CardTitle>
@@ -100,12 +98,12 @@ const UpdateViewCeoPublications = () => {
                         <CardContent>
                             <div className="grid w-full items-center gap-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
-                                    
-                                    <Label htmlFor="publicationsNo" className="text-right text-slate-300 font-bold">Parameters Value</Label>
-                                    <Input value={publication.publicationsNo} onChange={(e) => handleChange(e)} disabled={isDisabled} id="publicationsNo" name="publicationsNo" placeholder="Enter Parameter Name" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+
+                                    <Label htmlFor="publicationsNo" className="text-right text-slate-300 font-bold">Performance Value</Label>
+                                    <Input value={publication.publicationsNo} onChange={(e) => handleChange(e)} disabled={isDisabled} type="number" id="publicationsNo" name="publicationsNo" placeholder="Enter Performance Value" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
 
                                     <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Parameter Name</Label>
-                                    <Select value={publicationsTypeId} onValueChange={(value) => setPublicationsTypeId(value)} disabled={isDisabled} name="publicationsName" id="publicationsName" className="col-span-3 border-slate-300 ">
+                                    <Select value={publicationsTypeId} onValueChange={(value) => setPublicationsTypeId(value)} disabled={isDisabled} type="text" name="publicationsName" id="publicationsName" required className="col-span-3 border-slate-300 ">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
                                             <SelectValue placeholder="Select Parameter Name" />
                                         </SelectTrigger>
@@ -121,7 +119,7 @@ const UpdateViewCeoPublications = () => {
                                     </Select>
 
                                     <Label htmlFor="rcCenterId" className="text-right text-slate-300 font-bold">Rc Center</Label>
-                                    <Select value={rcCenterId} onValueChange={(value) => setRcCenterId(value)} disabled={isDisabled} id="rcCenterId" name="rcCenterId" className="col-span-3 border-slate-300 ">
+                                    <Select value={rcCenterId} onValueChange={(value) => setRcCenterId(value)} disabled={isDisabled} type="text" id="rcCenterId" name="rcCenterId" required className="col-span-3 border-slate-300 ">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
                                             <SelectValue placeholder="Select Rc Center" />
                                         </SelectTrigger>

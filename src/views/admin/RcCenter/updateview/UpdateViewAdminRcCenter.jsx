@@ -5,10 +5,10 @@ import { Input } from '@/components/ui/input';
 import { getByRcCenterId, updateRcCenter } from '@/services/RcCenterService';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import toast, {Toaster } from 'react-hot-toast';
 
 function useQuery() {
     const { search } = useLocation();
-
     return useMemo(() => new URLSearchParams(search), [search]);
 }
 
@@ -31,13 +31,21 @@ const UpdateViewAdminRcCenter = () => {
         setRcCenter({ ...rcCenter, [e.target.name]: e.target.value });
     };
 
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const response = await updateRcCenter(rcCenter).catch(console.log)
+        if (response?.data?.status) {
+            toast.success("Update RC Center successfully!!👍");
+            navigate("/admin-dashboard/rcCenter");
+        }
+    };
+
     useEffect(() => {
 
         if (!query.get('updatecall')) {
             setIsDisabled(true)
             setTitle("View Details of Rc Center")
         }
-
         getByRcCenterId(params.rcCenterId).then((response) => {
             if (!response.data.data) {
                 return navigate("/admin-dashboard/rcCenter");
@@ -49,30 +57,22 @@ const UpdateViewAdminRcCenter = () => {
 
     }, [query, params.rcCenterId])
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const response = await updateRcCenter(rcCenter).catch(console.log)
-        if (response?.data?.status) {
-            toast.success("Update RC Center successfully!!👍");
-            navigate("/admin-dashboard/rcCenter");
-        }
-    };
-
     return (
         <>
+        <Toaster/>
             <div className="main-container">
-                <Card className="w-[1100px] mx-auto my-20 bg-[#1d2634] text-white">
+                <Card className="w-[600px] mx-auto my-20 bg-[#1d2634] text-white">
                     <form onSubmit={(e) => onSubmit(e)}>
                         <CardHeader>
                             <CardTitle>{title}</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className="grid w-full items-center gap-4">
-                                <div className="grid grid-cols-10 items-center gap-4">
+                                <div className="grid grid-cols-2 items-center gap-4">
                                     <Label htmlFor="rcCenterName" className="text-right text-slate-300 font-bold">Rc Center Name</Label>
-                                    <Input value={rcCenter.rcCenterName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" id="rcCenterName" name="rcCenterName" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Input value={rcCenter.rcCenterName} onChange={(e) => handleChange(e)} disabled={isDisabled} type="text" id="rcCenterName" name="rcCenterName" placeholder="Enter RC Center" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                     <Label htmlFor="totalMembers" className="text-right text-slate-300 font-bold">Total Members</Label>
-                                    <Input value={rcCenter.totalMembers} onChange={(e) => handleChange(e)} disabled={isDisabled} type="number" name="totalMembers" id="totalMembers" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                    <Input value={rcCenter.totalMembers} onChange={(e) => handleChange(e)} disabled={isDisabled} type="number" name="totalMembers" id="totalMembers" placeholder="Enter Total Members" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                 </div>
                             </div>
                         </CardContent>
@@ -91,7 +91,7 @@ const UpdateViewAdminRcCenter = () => {
                                     </Link>
                                 </>
                             )}
-                            <Button type="submit" disabled={isDisabled} className="bg-gray-800 text-white border border-gray-500">Save</Button>
+                            <Button type="submit" className="bg-gray-800 text-white border border-gray-500">Save</Button>
                         </CardFooter>
                     </form>
                 </Card>

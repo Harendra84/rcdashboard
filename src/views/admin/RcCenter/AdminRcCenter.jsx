@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
-import { columns } from './Columans';
+import { columns } from './Columns';
 import DataTable from './DataTable';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { addRcCenter, rcCenterLists, updateRcCenter } from '@/services/RcCenterService';
+import { addRcCenter, rcCenterLists } from '@/services/RcCenterService';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import toast, { Toaster } from 'react-hot-toast';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
 
 const AdminRcCenter = (props) => {
 
@@ -17,6 +19,8 @@ const AdminRcCenter = (props) => {
         "rcCenterName": "",
         "totalMembers": 0,
     });
+    const [loading, setLoading] = useState(false);
+
 
     const handleChange = (e) => {
         setRcCenter({ ...rcCenter, [e.target.name]: e.target.value });
@@ -25,19 +29,19 @@ const AdminRcCenter = (props) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const response = await addRcCenter(rcCenter).catch(console.log);
-        if (response?.data.status) {
+        if (response?.data?.status) {
             setIsDialogOpen(false)
             setRcCenters([...rcCenters, response.data.data])
             toast.success("Added RC Center successfully!!👍");
         }
     };
 
-    
-    // rc center list
     useEffect(() => {
         rcCenterLists().then((response) => {
+            setLoading(true)
             setRcCenters(response.data.listOfData);
             toast.success("Fetch RC Centers successfully!!👍");
+            setLoading(false)
         }).catch(error => {
             console.log(error)
         })
@@ -68,9 +72,9 @@ const AdminRcCenter = (props) => {
                                             <div className="grid gap-4 py-4">
                                                 <div className="grid grid-cols-2 items-center gap-4">
                                                     <Label htmlFor="rcCenterName" className="text-right text-slate-300 font-bold">Rc Center Name</Label>
-                                                    <Input onChange={(e) => handleChange(e)} id="rcCenterName" name="rcCenterName" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                    <Input onChange={(e) => handleChange(e)} type="text" id="rcCenterName" name="rcCenterName" placeholder="Enter RC Center" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                     <Label htmlFor="totalMembers" className="text-right text-slate-300 font-bold">Total Members</Label>
-                                                    <Input onChange={(e) => handleChange(e)} type="number" name="totalMembers" id="totalMembers" className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
+                                                    <Input onChange={(e) => handleChange(e)} type="number" name="totalMembers" id="totalMembers" placeholder="Enter Total Members" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
                                                 </div>
                                             </div>
                                             <DialogFooter>
@@ -86,7 +90,15 @@ const AdminRcCenter = (props) => {
                         </div>
                     </div>
                     <div className="mt-12 shadow-sm rounded-lg overflow-x-auto">
-                        <DataTable columns={columns} data={rcCenters} />
+                        {
+                            loading ?
+                                (
+                                    <AiOutlineLoading3Quarters className="flex items-center justify-center w-full animate-spin text-lg" />
+                                ) :
+                                (
+                                    <DataTable columns={columns} data={rcCenters} />
+                                )
+                        }
                     </div>
                 </div>
             </div>

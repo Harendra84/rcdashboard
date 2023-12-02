@@ -25,6 +25,7 @@ import ManagerDashboard from "@/views/Manager/Dashboard/ManagerDashboard";
 import ManagerPublicationsType from "@/views/Manager/PublicationType/ManagerPublicationsType";
 import ManagerPublications from "@/views/Manager/Publications/ManagerPublications";
 import Profile from "@/components/Profile";
+import ManagereRcCenter from "@/views/manager/RcCenter/ManagereRcCenter";
 
 const AuthRoutes = [
 
@@ -78,6 +79,7 @@ const AuthRoutes = [
           <Route path="/" element={<ManagerDashboard />} />
           <Route path="/publicationstype" element={<ManagerPublicationsType />} />
           <Route path="/publications" element={<ManagerPublications />} />
+          <Route path="/rccenter" element={<ManagereRcCenter />} />
           <Route path="/profile" element={<Profile/>}/>
         </Routes>
       </Layout>
