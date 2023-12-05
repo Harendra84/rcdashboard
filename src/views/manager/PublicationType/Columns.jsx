@@ -101,10 +101,10 @@ export const columns = [
         header: "Benchmarks No",
         accessorKey: "benchmarksNo"
     },
-    {
-        header: "Actions",
-        id: "actons",
-        enableHiding: false,
-        cell: CellComponent
-    }
+    // {
+    //     header: "Actions",
+    //     id: "actons",
+    //     enableHiding: false,
+    //     cell: CellComponent
+    // }
 ]

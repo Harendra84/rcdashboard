@@ -83,7 +83,7 @@ const Login = () => {
                     placeholder="Password"
                     onChange={handleChange}
                   />
-                  <button className="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-2 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" onClick={handleSubmit} type="submit">
+                  <button className="mt-5 tracking-wide font-semibold bg-slate-500 text-gray-100 w-full py-2 rounded-lg hover:bg-slate-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none" onClick={handleSubmit} type="submit">
                     <svg
                       className="w-6 h-6 -ml-2"
                       fill="none"

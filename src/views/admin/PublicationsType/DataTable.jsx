@@ -73,13 +73,13 @@ export default function DataTable({ columns, data }) {
 
     return (
         <div>
-            <div className="flex items-center py-4 px-2 rounded-lg">
+            <div className="flex items-center py-4 px-2 rounded-full">
                 {/* Search for all the data */}
                 <Debounced value={globalFilter ?? ""} onChange={(value) => setGlobalFilter(String(value))}
                     placeholder="Filter all..."
                 />
             </div>
-            <div className="rounded-md border">
+            <div className="rounded-md border bg-slate-300">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -127,13 +127,13 @@ export default function DataTable({ columns, data }) {
             </div>
             <div className="flex justify-between items-center py-4">
                 <div className="flex items-center space-x-2">
-                    <span className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-700 md:text-sm">Page <strong> {table.getState().pagination.pageIndex + 1} </strong> of <strong> {table.getPageCount()} </strong> </span>
+                    <span className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-full hover:bg-gray-500 active:bg-gray-700 md:text-sm">Page <strong> {table.getState().pagination.pageIndex + 1} </strong> of <strong> {table.getPageCount()} </strong> </span>
                 </div>
                 <div className="flex items-center space-x-2">
                     <Button
                         variant="outline"
                         size="sm"
-                        className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-700 md:text-sm"
+                        className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-full hover:bg-gray-500 active:bg-gray-700 md:text-sm"
                         onClick={() => table.setPageIndex(0)}
                         disabled={!table.getCanPreviousPage()}
                     >
@@ -142,7 +142,7 @@ export default function DataTable({ columns, data }) {
                     <Button
                         variant="outline"
                         size="sm"
-                        className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-700 md:text-sm"
+                        className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-full hover:bg-gray-500 active:bg-gray-700 md:text-sm"
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
                     >
@@ -151,7 +151,7 @@ export default function DataTable({ columns, data }) {
                     <Button
                         variant="outline"
                         size="sm"
-                        className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-700 md:text-sm"
+                        className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-full hover:bg-gray-500 active:bg-gray-700 md:text-sm"
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                     >
@@ -160,17 +160,17 @@ export default function DataTable({ columns, data }) {
                     <Button
                         variant="outline"
                         size="sm"
-                        className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-700 md:text-sm"
+                        className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-full hover:bg-gray-500 active:bg-gray-700 md:text-sm"
                         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                         disabled={!table.getCanNextPage()}
                     >
                         Last
                     </Button>
-                    <Select onValueChange={(value) => table.setPageSize(Number(value))} name="role" id="role" className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-700 md:text-sm outline-none" value={table.getState().pagination.pageSize}>
-                        <SelectTrigger className="focus:outline-none outline-none bg-gray-800 h-9 text-white">
+                    <Select onValueChange={(value) => table.setPageSize(Number(value))} name="role" id="role" className="inline-block px-4 py-2 text-white hover:text-white duration-150 font-medium bg-gray-800 rounded-full hover:bg-gray-500 active:bg-gray-700 md:text-sm outline-none" value={table.getState().pagination.pageSize}>
+                        <SelectTrigger className="focus:outline-none outline-none bg-gray-800 h-9 text-white rounded-full">
                             <SelectValue placeholder="Show Page" />
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-800 text-white" >
+                        <SelectContent className="bg-gray-800 text-white rounded-xl" >
                             <SelectGroup>
                                 <SelectLabel>Show Page</SelectLabel>
                                 {[5, 10, 20, 30, 40, 50].map((pageSize) => (

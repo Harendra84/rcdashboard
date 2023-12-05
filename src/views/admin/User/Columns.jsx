@@ -38,16 +38,16 @@ export const CellComponent = ({ row }) => {
             <Dialog>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-10 bg-gray-800 text-white border border-gray-500">
+                        <Button variant="ghost" className="h-10 bg-gray-800 text-white border border-slate-600 hover:bg-gray-400 rounded-full ">
                             <span className="sr-only">Open Menu</span>
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="bg-gray-800">
+                    <DropdownMenuContent align="end" className="bg-gray-800 rounded-xl">
                         <DropdownMenuLabel className="text-white">Actions</DropdownMenuLabel>
                         <Link to={`/admin-dashboard/user/manage/${row.original.userId}`}>
                             <DropdownMenuItem>
-                                <Button variant="ghost" className="h-8 w-full bg-blue-500 text-white hover:bg-white-600 border border-gray-500">
+                                <Button variant="ghost" className="h-8 w-full bg-blue-500 text-white hover:bg-white-600 border border-gray-500 rounded-full">
                                     View
                                 </Button>
                             </DropdownMenuItem>
@@ -55,7 +55,7 @@ export const CellComponent = ({ row }) => {
                         <DropdownMenuSeparator />
                         <Link to={`/admin-dashboard/user/manage/${row.original.userId}/?updatecall=true`} state={{ 'updatecall': true }}>
                             <DropdownMenuItem>
-                                <Button variant="ghost" className="h-8 w-full bg-green-800 text-white border hover:bg-white-600 border-gray-500">
+                                <Button variant="ghost" className="h-8 w-full bg-green-800 text-white border hover:bg-white-600 border-gray-500 rounded-full">
                                     Edit
                                 </Button>
                             </DropdownMenuItem>
@@ -63,7 +63,7 @@ export const CellComponent = ({ row }) => {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
                             <DialogTrigger asChild>
-                                <Button variant="ghost" className="h-8 w-full bg-red-800 text-white border hover:bg-white-600 border-gray-500" onClick={() => setIsDialogOpen(true)}>
+                                <Button variant="ghost" className="h-8 w-full bg-red-800 text-white border hover:bg-white-600 border-gray-500 rounded-full" onClick={() => setIsDialogOpen(true)}>
                                     Remove
                                 </Button>
                             </DialogTrigger>

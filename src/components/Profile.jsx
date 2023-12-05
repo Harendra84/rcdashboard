@@ -22,7 +22,7 @@ const Profile = () => {
         <div className="grid w-full gap-4">
           <div className="grid grid-cols-1 gap-8 mx-auto">
             <div className="">
-              <Card className="w-[400px] h-[400px] rounded-full" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
+              <Card className="w-[400px] h-[400px] rounded-full bg-slate-300">
                 <CardHeader className="flex justify-center items-center">
                   <Avatar>
                     <AvatarImage src="/avataaars.svg" alt="@shadcn" />
@@ -33,16 +33,16 @@ const Profile = () => {
                 </CardHeader>
                 <CardContent className="grid grid-cols-1 gap-1 mx-auto">
                   <div className="flex items-center mx-auto">
-                    <span className="text-slate-300 font-bold">Full Name : </span>
-                    <CardDescription className="mx-2 text-slate-300"> {userData && (
+                    <span className="text-black-300 font-bold">Full Name : </span>
+                    <CardDescription className="mx-2 text-black-300"> {userData && (
                       <div>
                         <p>{userData.fullName}</p>
                       </div>
                     )}</CardDescription>
                   </div>
                   <div className="flex items-center mx-auto">
-                    <span className="text-slate-300 font-bold">Username : </span>
-                    <CardDescription className="mx-2 text-slate-300">
+                    <span className="text-black-300 font-bold">Username : </span>
+                    <CardDescription className="mx-2 text-black-300">
                       {userData && (
                         <div>
                           <p>{userData.username}</p>
@@ -51,8 +51,8 @@ const Profile = () => {
                     </CardDescription>
                   </div>
                   <div className="flex items-center mx-auto">
-                    <span className="text-slate-300 font-bold">Role Type : </span>
-                    <CardDescription className="mx-2 text-slate-300">
+                    <span className="text-black-300 font-bold">Role Type : </span>
+                    <CardDescription className="mx-2 text-black-300">
                       {userData && (
                         <div>
                           <p>{userData.roleType}</p>

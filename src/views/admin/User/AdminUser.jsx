@@ -101,9 +101,9 @@ const AdminUser = (props) => {
                         <div className="mt-3 md:mt-0 flex gap-4">
                             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                                 <DialogTrigger asChild>
-                                    <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-800 md:text-sm">Add User</Button>
+                                    <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 hover:bg-gray-500 active:bg-gray-800 md:text-sm rounded-full">Add User</Button>
                                 </DialogTrigger>
-                                <DialogContent className="sm:max-w-3xl" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
+                                <DialogContent className="sm:max-w-3xl" style={{ backgroundColor: '#1d2634', color: '#ffffff'}}>
                                     <form onSubmit={(e) => onSubmit(e)}>
                                         <DialogHeader>
                                             <DialogTitle className="text-white">Add User</DialogTitle>

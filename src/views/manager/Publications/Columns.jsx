@@ -129,10 +129,10 @@ export const columns = [
         enableHiding: false,
         cell: showPublicationColor,
     },
-    {
-        header: "Actions",
-        id: "actions",
-        enableHiding: false,
-        cell: CellComponent
-    },
+    // {
+    //     header: "Actions",
+    //     id: "actions",
+    //     enableHiding: false,
+    //     cell: CellComponent
+    // },
 ]

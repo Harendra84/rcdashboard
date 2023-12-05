@@ -14,7 +14,7 @@ const Layout = ({ accessRoutes, children }) => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50/50 relative">
+      <div className="min-h-screen bg-gray-50/50 relative bg-slate-100">
         <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} accessRoutes={accessRoutes} />
         <div className="p-4 xl:ml-80">
           <Header OpenSidebar={OpenSidebar} openSidebarToggle={openSidebarToggle} profile={Profile}/>

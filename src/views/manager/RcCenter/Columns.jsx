@@ -40,7 +40,7 @@ export const CellComponent = ({ row }) => {
                         <DropdownMenuLabel className="text-white">Actions</DropdownMenuLabel>
                         <Link to={`/manager-dashboard/rcCenter/`}>
                             <DropdownMenuItem>
-                                <Button variant="ghost" className="h-8 w-full bg-blue-500 text-white hover:bg-white-600 border border-gray-500">
+                                <Button variant="ghost" className="h-8 w-full bg-blue-500 text-white hover:bg-white-600 border border-gray-500 rounded-full">
                                     View
                                 </Button>
                             </DropdownMenuItem>
@@ -48,7 +48,7 @@ export const CellComponent = ({ row }) => {
                         <DropdownMenuSeparator />
                         <Link to={`/manager-dashboard/rcCenter/`} state={{ 'updatecall': false }}>
                             <DropdownMenuItem>
-                                <Button variant="ghost" className="h-8 w-full bg-green-800 text-white border hover:bg-white-600 border-gray-500">
+                                <Button variant="ghost" className="h-8 w-full bg-green-800 text-white border hover:bg-white-600 border-gray-500 rounded-full">
                                     Edit
                                 </Button>
                             </DropdownMenuItem>
@@ -56,7 +56,7 @@ export const CellComponent = ({ row }) => {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
                             <DialogTrigger asChild>
-                                <Button variant="ghost" className="h-8 w-full bg-red-800 text-white border hover:bg-white-600 border-gray-500" onClick={() => setIsDialogOpen(false)}>
+                                <Button variant="ghost" className="h-8 w-full bg-red-800 text-white border hover:bg-white-600 border-gray-500 rounded-full" onClick={() => setIsDialogOpen(false)}>
                                     Remove
                                 </Button>
                             </DialogTrigger>
@@ -101,10 +101,10 @@ export const columns = [
         accessorKey: "totalMembers",
         header: "Total Members",
     },
-    {
-        header: "Actions",
-        id: "actons",
-        enableHiding: false,
-        cell: CellComponent,
-    },
+    // {
+    //     header: "Actions",
+    //     id: "actons",
+    //     enableHiding: false,
+    //     cell: CellComponent,
+    // },
 ]

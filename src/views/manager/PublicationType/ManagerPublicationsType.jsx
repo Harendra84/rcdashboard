@@ -61,7 +61,7 @@ const ManagerPublicationsType = (props) => {
                             <div className="mt-3 md:mt-0 flex gap-4">
                                 <Dialog open={isDialogOpen} onOpenChange={false}>
                                     <DialogTrigger asChild>
-                                        <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-800 md:text-sm">Add Parameters</Button>
+                                        {/* <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 rounded-lg hover:bg-gray-500 active:bg-gray-800 md:text-sm">Add Parameters</Button> */}
                                     </DialogTrigger>
                                     <DialogContent className="sm:max-w-2xl" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
                                         <form onSubmit={(e) => onSubmit(e)}>
