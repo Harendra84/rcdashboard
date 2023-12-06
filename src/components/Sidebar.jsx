@@ -16,10 +16,10 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
         <>
             <aside
                 className={`${openSidebarToggle ? '-translate-x-80' : ''} bg-gradient-to-br from-slate-300 to-slate-400 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0`}>
-                <div className="relative border-b border-slate-400">
-                    <a className="flex items-center gap-4 py-6 px-8" href="#/">
+                <div className="relative border-b border-slate-500 m-4">
+                    <a className="flex items-center gap-2 py-4 px-4" href="#/">
                         <h6
-                            className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-black">
+                            className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-black uppercase">
                             RC Dashboard
                         </h6>
                     </a>
@@ -40,9 +40,9 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                         {
                             accessRoutes.length > 0 ? accessRoutes.map((value, index) => (
                                 <li key={index}>
-                                    <Link aria-current="page" className="active" to={value.link}>
+                                    <Link aria-current="page" className="active" to={value.link} >
                                         <button
-                                            className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-slate-500 active:bg-slate-700 w-full flex items-center gap-4 px-4 capitalize ${value.link === location.pathname ? 'bg-gradient-to-tr from-slate-600 to-slate-400 shadow-md shadow-slate-500/20 hover:shadow-lg hover:shadow-slate-500/40 active:opacity-[0.85]' : ''}`}
+                                            className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:text-white hover:bg-slate-500 active:bg-slate-700 w-full flex items-center gap-4 px-4 capitalize ${value.link === location.pathname ? 'bg-gradient-to-tr from-slate-600 to-slate-400 shadow-md shadow-slate-500/20 hover:shadow-lg hover:shadow-slate-500/40 active:opacity-[0.85]' : ''}`}
                                             type="button">
                                             <span> {value.iconName} </span>
                                             <p
@@ -57,24 +57,26 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
 
                         }
                     </ul>
-                    <ul className="mb-4 flex flex-col gap-1">
-                        <li className="mx-3.5 mt-4 mb-2">
+                    <ul className="mb-2 flex flex-col gap-1">
+                        <li className="relative border-b border-slate-500 flex items-center gap-2 py-4 px-4">
                             <p
-                                className="block antialiased font-sans text-sm leading-normal text-black font-black uppercase opacity-75">
+                                className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-black uppercase opacity-100">
                                 auth pages
                             </p>
                         </li>
-                        {/* <li>
-                        <button
-                            className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
-                            type="button">
-                            <FaUserCircle className='icon' />
-                            <p
-                                className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-                                profile
-                            </p>
-                        </button>
-                    </li> */}
+                        <li>
+                            <Link to={'/profile/'}>
+                                <button
+                                    className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-slate-500 active:bg-slate-600 hover:text-white w-full flex items-center gap-4 px-4 capitalize"
+                                    type="button">
+                                    <FaUserCircle className='icon' />
+                                    <p
+                                        className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                                        profile
+                                    </p>
+                                </button>
+                            </Link>
+                        </li>
                         <li>
                             <button onClick={() => handleLogOut()} className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-slate-500 active:bg-slate-600 w-full flex items-center gap-4 px-4 capitalize"
                                 type="button">
@@ -85,7 +87,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                                         clipRule="evenodd" />
                                 </svg>
                                 <p
-                                    className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                                    className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize hover:text-white">
                                     logout
                                 </p>
                             </button>
