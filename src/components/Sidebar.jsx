@@ -40,7 +40,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                         {
                             accessRoutes.length > 0 ? accessRoutes.map((value, index) => (
                                 <li key={index}>
-                                    <Link aria-current="page" className="active" to={value.link} >
+                                    <Link aria-current="page" className="active" to={value.link}>
                                         <button
                                             className={`middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:text-white hover:bg-slate-500 active:bg-slate-700 w-full flex items-center gap-4 px-4 capitalize ${value.link === location.pathname ? 'bg-gradient-to-tr from-slate-600 to-slate-400 shadow-md shadow-slate-500/20 hover:shadow-lg hover:shadow-slate-500/40 active:opacity-[0.85]' : ''}`}
                                             type="button">
@@ -65,17 +65,15 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                             </p>
                         </li>
                         <li>
-                            <Link to={'/profile/'}>
-                                <button
-                                    className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-slate-500 active:bg-slate-600 hover:text-white w-full flex items-center gap-4 px-4 capitalize"
-                                    type="button">
-                                    <FaUserCircle className='icon' />
-                                    <p
-                                        className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-                                        profile
-                                    </p>
-                                </button>
-                            </Link>
+                            <button
+                                className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-slate-500 active:bg-slate-600 hover:text-white w-full flex items-center gap-4 px-4 capitalize"
+                                type="button">
+                                <FaUserCircle className='icon' />
+                                <p
+                                    className="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
+                                    profile
+                                </p>
+                            </button>
                         </li>
                         <li>
                             <button onClick={() => handleLogOut()} className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-slate-500 active:bg-slate-600 w-full flex items-center gap-4 px-4 capitalize"
