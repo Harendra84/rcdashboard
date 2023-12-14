@@ -64,7 +64,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                                 auth pages
                             </p>
                         </li>
-                        <li>
+                        {/* <li>
                             <button
                                 className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-slate-500 active:bg-slate-600 hover:text-white w-full flex items-center gap-4 px-4 capitalize"
                                 type="button">
@@ -74,7 +74,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar, accessRoutes }) {
                                     profile
                                 </p>
                             </button>
-                        </li>
+                        </li> */}
                         <li>
                             <button onClick={() => handleLogOut()} className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-black hover:bg-slate-500 active:bg-slate-600 w-full flex items-center gap-4 px-4 capitalize"
                                 type="button">
