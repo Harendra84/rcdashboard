@@ -38,7 +38,7 @@ export default function DataTable({ columns, data }) {
     const [{ pageIndex, pageSize }, setPagination] =
         useState({
             pageIndex: 0,
-            pageSize: 10,
+            pageSize: 5,
         })
     const [sorting, setSorting] = useState([])
 
@@ -171,7 +171,7 @@ export default function DataTable({ columns, data }) {
                         <SelectContent className="bg-gray-800 text-white rounded-xl" >
                             <SelectGroup>
                                 <SelectLabel>Show Page</SelectLabel>
-                                {[10, 20, 30, 40, 50].map((pageSize) => (
+                                {[5, 10, 20, 30, 40, 50].map((pageSize) => (
                                     <SelectItem value={pageSize} key={pageSize}>Show {pageSize}</SelectItem>
                                 ))}
                             </SelectGroup>

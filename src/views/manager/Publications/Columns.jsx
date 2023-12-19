@@ -15,11 +15,11 @@ const showPublicationColor = ({ row }) => {
     const totalMember = row.original.rcCenter.totalMembers;
     const benchMarks = row.original.publicationsType.benchmarksNo;
     const avg = Math.ceil(totalMember * benchMarks);
-    let colorClass = "text-red-600 font-semibold bg-[#ffcdd2] px-8 py-2 rounded-xl";
+    let colorClass = "font-semibold bg-[#ff0000] px-8 py-2 rounded-xl";
     if (avg === row.original.publicationsNo) {
-        colorClass = "text-yellow-600 font-semibold bg-[#fff9c4] px-8 py-2 rounded-xl";
+        colorClass = "font-semibold bg-[#ffff00] px-8 py-2 rounded-xl";
     } else if (row.original.publicationsNo > avg) {
-        colorClass = "text-green-600 font-semibold bg-[#c8e6c9] px-8 py-2 rounded-xl";
+        colorClass = "font-semibold bg-[#00ff00] px-8 py-2 rounded-xl";
     }
     return <span className={colorClass}>{row.original.publicationsNo}</span>;
 }
@@ -129,10 +129,4 @@ export const columns = [
         enableHiding: false,
         cell: showPublicationColor,
     },
-    // {
-    //     header: "Actions",
-    //     id: "actions",
-    //     enableHiding: false,
-    //     cell: CellComponent
-    // },
 ]
