@@ -23,6 +23,8 @@ const UpdateViewAdminUser = () => {
     const [status, setStatus] = useState();
     const [title, setTitle] = useState("Update User");
     const [isDisabled, setIsDisabled] = useState(false);
+    const [rcCenterName, setRcCenterName] = useState("");
+
 
     const query = useQuery();
     const params = useParams();
@@ -55,9 +57,8 @@ const UpdateViewAdminUser = () => {
 
         rcCenterLists().then((response) => {
             setRcCenters(response.data.listOfData);
-        }).catch(error => {
-            console.log(error)
-        })
+        }).catch(console.log)
+
         getUserById(params.userId).then((response) => {
             if (!response.data.data) {
                 return navigate("/admin-dashboard/user");
@@ -67,11 +68,8 @@ const UpdateViewAdminUser = () => {
             setRoleType(response.data.data.roleType);
             setCampus(response.data.data.campus);
             setRcCenterId(response.data.data.rcCenter.rcCenterId);
-        }).catch(error => {
-            console.log(error)
-        })
-
-    }, [query, params.userId])
+        }).catch(console.log)
+    }, [])
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -86,6 +84,13 @@ const UpdateViewAdminUser = () => {
         }
     };
 
+
+    useEffect(() => {
+        const selectedCenter = rcCenters.find(center => center.rcCenterId === rcCenterId);
+        if (selectedCenter) {
+            setRcCenterName(selectedCenter.rcCenterName);
+        }
+    }, [rcCenters, rcCenterId]);
     return (
         <>
             <div className="main-container">
@@ -165,9 +170,15 @@ const UpdateViewAdminUser = () => {
                                     </Select>
 
                                     <Label htmlFor="rcCenterName" className="text-right text-slate-300 font-bold">Rc Center</Label>
-                                    <Select value={rcCenterId} onValueChange={(value) => setRcCenterId(value)} disabled={isDisabled} type="text" name="rcCenterName" id="rcCenterName" placeholder="Enter RC Center" required className="col-span-3 border-slate-300 ">
+                                    <Select value={rcCenterName} onValueChange={(value) => {
+                                        setRcCenterId(value);
+                                        const selectedCenter = rcCenters.find(center => center.rcCenterId === value);
+                                        if (selectedCenter) {
+                                            setRcCenterName(selectedCenter.rcCenterName);
+                                        }
+                                    }} disabled={isDisabled} type="text" name="rcCenterName" id="rcCenterName" placeholder="Enter RC Center" required className="col-span-3 border-slate-300 ">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
-                                            <SelectValue placeholder="Select Rc Center" />
+                                            <SelectValue>{rcCenterName || "Select Rc Center"}</SelectValue>
                                         </SelectTrigger>
                                         <SelectContent position="popper" className="bg-gray-800 text-white">
                                             {

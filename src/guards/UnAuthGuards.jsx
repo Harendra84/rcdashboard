@@ -8,7 +8,7 @@ const UnAuthGuard = ({ component }) => {
 
     useEffect(() => {
         checkUser();
-    }, [component]);
+    }, []);
 
     const checkUser = async () => {
         try {
