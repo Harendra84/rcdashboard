@@ -23,6 +23,8 @@ const UpdateViewCoordinatorPublications = () => {
     const [rcCenterId, setRcCenterId] = useState();
     const [title, setTitle] = useState("Update Performance");
     const [isDisabled, setIsDisabled] = useState(false);
+    const [publicationsType, setPublicationsType] = useState("");
+    const [rcCenterName, setRcCenterName] = useState("");
 
     const query = useQuery();
     const params = useParams();
@@ -87,6 +89,21 @@ const UpdateViewCoordinatorPublications = () => {
 
     }, [query, params.publicationsId])
 
+    useEffect(() => {
+        const selectedPublicationType = publicationsTypes.find(types => types.publicationsTypeId === publicationsTypeId);
+        if (selectedPublicationType) {
+            setPublicationsType(selectedPublicationType.publicationsType);
+        }
+    }, [publicationsTypes, publicationsTypeId]);
+
+
+    useEffect(() => {
+        const selectedCenter = rcCenters.find(center => center.rcCenterId === rcCenterId);
+        if (selectedCenter) {
+            setRcCenterName(selectedCenter.rcCenterName);
+        }
+    }, [rcCenters, rcCenterId]);
+
     return (
         <>
         <Toaster/>
@@ -103,26 +120,39 @@ const UpdateViewCoordinatorPublications = () => {
                                     <Label htmlFor="publicationsNo" className="text-right text-slate-300 font-bold">Performance Value</Label>
                                     <Input value={publication.publicationsNo} onChange={(e) => handleChange(e)} disabled={isDisabled} type="number" id="publicationsNo" name="publicationsNo" placeholder="Enter Performance Value" required className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white" />
 
-                                    <Label htmlFor="publicationsName" className="text-right text-slate-300 font-bold">Parameter Name</Label>
-                                    <Select value={publicationsTypeId} onValueChange={(value) => setPublicationsTypeId(value)} disabled={isDisabled} type="text" name="publicationsName" id="publicationsName" required className="col-span-3 border-slate-300 ">
+                                    
+                                    <Label htmlFor="publicationsType" className="text-right text-slate-300 font-bold">Parameter Name</Label>
+                                    <Select value={publicationsType} onValueChange={(value) => {
+                                        setPublicationsTypeId(value);
+                                        const selectedPublicationsType = publicationsTypes.find(parameters => parameters.publicationsTypeId === value);
+                                        if (selectedPublicationsType) {
+                                            setPublicationsType(selectedPublicationsType.publicationsType);
+                                        }
+                                    }} disabled={isDisabled} type="text" name="publicationsType" id="publicationsType" placeholder="Enter Publications Type" required className="col-span-3 border-slate-300 ">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
-                                            <SelectValue placeholder="Select Parameter Name" />
+                                            <SelectValue>{publicationsType || "Select Parameters"}</SelectValue>
                                         </SelectTrigger>
                                         <SelectContent position="popper" className="bg-gray-800 text-white">
                                             {
-                                                publicationsTypes.length > 0 ? publicationsTypes.map((type) => (
-                                                    <div className="" key={type.publicationsTypeId}>
-                                                        <SelectItem value={type.publicationsTypeId}>{type.publicationsName}</SelectItem>
+                                                publicationsTypes.length > 0 ? publicationsTypes.map((parameters) => (
+                                                    <div className="" key={parameters.publicationsTypeId}>
+                                                        <SelectItem value={parameters.publicationsTypeId}>{parameters.publicationsType}</SelectItem>
                                                     </div>
                                                 )) : null
                                             }
                                         </SelectContent>
                                     </Select>
 
-                                    <Label htmlFor="rcCenterId" className="text-right text-slate-300 font-bold">Rc Center</Label>
-                                    <Select value={rcCenterId} onValueChange={(value) => setRcCenterId(value)} disabled={isDisabled} type="text" id="rcCenterId" name="rcCenterId" required className="col-span-3 border-slate-300 ">
+                                    <Label htmlFor="rcCenterName" className="text-right text-slate-300 font-bold">Rc Center</Label>
+                                    <Select value={rcCenterName} onValueChange={(value) => {
+                                        setRcCenterId(value);
+                                        const selectedCenter = rcCenters.find(center => center.rcCenterId === value);
+                                        if (selectedCenter) {
+                                            setRcCenterName(selectedCenter.rcCenterName);
+                                        }
+                                    }} disabled={isDisabled} type="text" name="rcCenterName" id="rcCenterName" placeholder="Enter RC Center" required className="col-span-3 border-slate-300 ">
                                         <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
-                                            <SelectValue placeholder="Select Rc Center" />
+                                            <SelectValue>{rcCenterName || "Select Rc Center"}</SelectValue>
                                         </SelectTrigger>
                                         <SelectContent position="popper" className="bg-gray-800 text-white">
                                             {

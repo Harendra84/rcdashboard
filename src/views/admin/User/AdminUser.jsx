@@ -20,6 +20,7 @@ const AdminUser = (props) => {
     const [campus, setCampus] = useState("");
     const [active, setActive] = useState();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [rcCenterName, setRcCenterName] = useState("");
 
     const [user, setUser] = useState({
         "fullName": "",
@@ -38,21 +39,6 @@ const AdminUser = (props) => {
 
     const handleChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value });
-    };
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        user.rcCenter.rcCenterId = rcCenterId;
-        user.roleType = roleType;
-        user.campus = campus;
-        let isStatus = active === "true" ? true : false;
-        const updatedUser = { ...user, 'active': isStatus }
-        const response = addUser(updatedUser).catch(console.log);
-        if (response?.data?.status) {
-            setIsDialogOpen(false)
-            setUsers([...users, response.data.data])
-            toast.success("Added user successfully!!👍");
-        }
     };
 
     useEffect(() => {
@@ -74,6 +60,28 @@ const AdminUser = (props) => {
         })
 
     }, [])
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        user.rcCenter.rcCenterId = rcCenterId;
+        user.roleType = roleType;
+        user.campus = campus;
+        let isStatus = active === "true" ? true : false;
+        const updatedUser = { ...user, 'active': isStatus }
+        const response = addUser(updatedUser).catch(console.log);
+        if (response?.data?.status) {
+            setIsDialogOpen(false)
+            setUsers([...users, response.data.data])
+            toast.success("Added user successfully!!👍");
+        }
+    };
+
+    useEffect(() => {
+        const selectedCenter = rcCenters.find(center => center.rcCenterId === rcCenterId);
+        if (selectedCenter) {
+            setRcCenterName(selectedCenter.rcCenterName);
+        }
+    }, [rcCenters, rcCenterId]);
 
     // check user active or inactive
     const modifiedData = users.map((values) => {
@@ -103,7 +111,7 @@ const AdminUser = (props) => {
                                 <DialogTrigger asChild>
                                     <Button variant="outline" className="inline-block px-4 py-2 text-white duration-150 font-medium bg-gray-800 hover:bg-gray-500 active:bg-gray-800 md:text-sm rounded-full">Add User</Button>
                                 </DialogTrigger>
-                                <DialogContent className="sm:max-w-3xl" style={{ backgroundColor: '#1d2634', color: '#ffffff'}}>
+                                <DialogContent className="sm:max-w-3xl" style={{ backgroundColor: '#1d2634', color: '#ffffff' }}>
                                     <form onSubmit={(e) => onSubmit(e)}>
                                         <DialogHeader>
                                             <DialogTitle className="text-white">Add User</DialogTitle>
@@ -179,9 +187,15 @@ const AdminUser = (props) => {
                                                 </Select>
 
                                                 <Label htmlFor="rcCenterName" className="text-right text-slate-300 font-bold">Rc Center</Label>
-                                                <Select onValueChange={(value) => setRcCenterId(value)} type="text" name="rcCenterName" id="rcCenterName" required className="col-span-3 border-slate-300 ">
+                                                <Select value={rcCenterName} onValueChange={(value) => {
+                                                    setRcCenterId(value);
+                                                    const selectedCenter = rcCenters.find(center => center.rcCenterId === value);
+                                                    if (selectedCenter) {
+                                                        setRcCenterName(selectedCenter.rcCenterName);
+                                                    }
+                                                }} type="text" name="rcCenterName" id="rcCenterName" placeholder="Enter RC Center" required className="col-span-3 border-slate-300 ">
                                                     <SelectTrigger className="col-span-3 border-slate-300 focus:outline-none bg-gray-800 text-white">
-                                                        <SelectValue placeholder="Select Rc Center" />
+                                                        <SelectValue>{rcCenterName || "Select Rc Center"}</SelectValue>
                                                     </SelectTrigger>
                                                     <SelectContent position="popper" className="bg-gray-800 text-white">
                                                         {
